@@ -7,6 +7,7 @@ import {
   getTopTrainedMuscles,
   validateDisplayName,
   validateUnitPreference,
+  validateAvatarFile,
 } from './profile';
 import { PRWorkoutInput, WorkoutPRResult } from './prs';
 import { MuscleTrainingExposure } from './exposure';
@@ -212,6 +213,50 @@ describe('Profile Domain Calculations & Validation', () => {
 
     it('returns empty array when no PRs exist', () => {
       expect(extractRecentPRs([], new Map(), new Map(), 'kg', 5)).toHaveLength(0);
+    });
+  });
+
+  describe('validateAvatarFile', () => {
+    it('rejects null or undefined file', () => {
+      expect(validateAvatarFile(null)).toEqual({
+        isValid: false,
+        error: 'Fotoğraf dosyası seçilmedi.',
+      });
+      expect(validateAvatarFile(undefined)).toEqual({
+        isValid: false,
+        error: 'Fotoğraf dosyası seçilmedi.',
+      });
+    });
+
+    it('rejects unsupported mime types', () => {
+      expect(validateAvatarFile({ size: 1024, type: 'image/gif' })).toEqual({
+        isValid: false,
+        error: 'Yalnızca JPEG, PNG veya WebP formatları desteklenir.',
+      });
+      expect(validateAvatarFile({ size: 1024, type: 'application/pdf' })).toEqual({
+        isValid: false,
+        error: 'Yalnızca JPEG, PNG veya WebP formatları desteklenir.',
+      });
+    });
+
+    it('rejects files larger than 2 MB', () => {
+      const over2MB = 2 * 1024 * 1024 + 1;
+      expect(validateAvatarFile({ size: over2MB, type: 'image/jpeg' })).toEqual({
+        isValid: false,
+        error: 'Fotoğraf boyutu 2 MB\'tan küçük olmalıdır.',
+      });
+    });
+
+    it('accepts valid JPEG, PNG, and WebP files <= 2 MB', () => {
+      expect(validateAvatarFile({ size: 1024 * 100, type: 'image/jpeg' })).toEqual({
+        isValid: true,
+      });
+      expect(validateAvatarFile({ size: 1024 * 100, type: 'image/png' })).toEqual({
+        isValid: true,
+      });
+      expect(validateAvatarFile({ size: 2 * 1024 * 1024, type: 'image/webp' })).toEqual({
+        isValid: true,
+      });
     });
   });
 });

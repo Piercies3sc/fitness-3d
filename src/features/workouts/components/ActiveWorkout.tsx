@@ -117,7 +117,7 @@ export function ActiveWorkout({ initialWorkout, previousPerformance, unitPrefere
           {initialWorkout.routine_name_snapshot}
         </h1>
         <div className="mt-3 flex items-center gap-3">
-          <span className="metric-value text-2xl text-accent font-mono tracking-tight">{elapsedTime}</span>
+          <span className="metric-value text-xl text-accent">{elapsedTime}</span>
           <span className="text-text-muted text-xs">
             Başlangıç {new Date(initialWorkout.started_at).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}
           </span>
@@ -138,11 +138,11 @@ export function ActiveWorkout({ initialWorkout, previousPerformance, unitPrefere
       </div>
 
       {/* Floating Action Bar for Mobile-First UX */}
-      <div className="fixed sm:static bottom-0 left-0 right-0 border-t border-border-strong bg-bg-elevated/95 p-3.5 backdrop-blur-md sm:mt-8 sm:border-t-0 sm:bg-transparent sm:p-0 sm:backdrop-blur-none flex flex-row items-center justify-center sm:justify-end z-10 pb-safe">
+      <div className="fixed sm:static bottom-0 left-0 right-0 border-t border-border-subtle bg-bg-elevated/95 p-3 backdrop-blur-sm sm:mt-8 sm:border-t-0 sm:bg-transparent sm:p-0 sm:backdrop-blur-none flex flex-row items-center justify-center sm:justify-end z-10 pb-safe">
         <button
           onClick={handleFinish}
           disabled={isFinishing || isDiscarding || completedSetCount === 0}
-          className="button-primary w-full sm:w-auto sm:min-w-48 text-sm font-semibold shadow-md disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          className="button-primary w-full sm:w-auto sm:min-w-44 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isFinishing ? 'Bitiriliyor...' : 'Antrenmanı Bitir'}
         </button>

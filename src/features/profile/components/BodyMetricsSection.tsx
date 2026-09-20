@@ -44,18 +44,19 @@ export function BodyMetricsSection({
           <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted">
             Vücut Ölçüleri
           </h3>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={() => setIsLogWeightModalOpen(true)}
-              className="px-2.5 py-1 rounded-md bg-accent/10 border border-accent/40 text-xs text-accent hover:bg-accent/20 font-medium cursor-pointer transition-colors"
+              className="text-xs text-accent hover:underline font-medium cursor-pointer"
             >
               + Kilo Ekle
             </button>
+            <span className="text-border-strong text-xs">|</span>
             <button
               type="button"
               onClick={() => setIsEditModalOpen(true)}
-              className="px-2.5 py-1 rounded-md border border-border-subtle text-xs text-text-secondary hover:text-text-primary hover:border-border-strong font-medium cursor-pointer transition-colors"
+              className="text-xs text-text-secondary hover:text-text-primary font-medium cursor-pointer"
             >
               Düzenle
             </button>

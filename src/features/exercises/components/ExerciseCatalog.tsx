@@ -120,10 +120,10 @@ export function ExerciseCatalog({ exercises }: ExerciseCatalogProps) {
           <button
             type="button"
             onClick={() => setActiveFilter('all')}
-            className={`shrink-0 px-3 py-1.5 rounded-md border font-medium transition-colors cursor-pointer ${
+            className={`shrink-0 px-3 py-1.5 rounded border font-medium transition-colors ${
               activeFilter === 'all'
-                ? 'bg-accent/10 border-accent/60 text-accent font-semibold'
-                : 'bg-surface-high/50 border-border-subtle text-text-secondary hover:text-text-primary hover:border-border-strong'
+                ? 'bg-accent border-accent text-white'
+                : 'bg-surface border-border-subtle text-text-secondary hover:text-text-primary hover:border-border-strong'
             }`}
           >
             Tümü ({filterCounts.all || 0})
@@ -131,10 +131,10 @@ export function ExerciseCatalog({ exercises }: ExerciseCatalogProps) {
           <button
             type="button"
             onClick={() => setActiveFilter('home')}
-            className={`shrink-0 px-3 py-1.5 rounded-md border font-medium transition-colors cursor-pointer ${
+            className={`shrink-0 px-3 py-1.5 rounded border font-medium transition-colors ${
               activeFilter === 'home'
-                ? 'bg-accent/10 border-accent/60 text-accent font-semibold'
-                : 'bg-surface-high/50 border-border-subtle text-text-secondary hover:text-text-primary hover:border-border-strong'
+                ? 'bg-accent border-accent text-white'
+                : 'bg-surface border-border-subtle text-text-secondary hover:text-text-primary hover:border-border-strong'
             }`}
           >
             Ev ({filterCounts.home || 0})
@@ -146,10 +146,10 @@ export function ExerciseCatalog({ exercises }: ExerciseCatalogProps) {
                 key={key}
                 type="button"
                 onClick={() => setActiveFilter(key)}
-                className={`shrink-0 px-3 py-1.5 rounded-md border font-medium transition-colors cursor-pointer ${
+                className={`shrink-0 px-3 py-1.5 rounded border font-medium transition-colors ${
                   activeFilter === key
-                    ? 'bg-accent/10 border-accent/60 text-accent font-semibold'
-                    : 'bg-surface-high/50 border-border-subtle text-text-secondary hover:text-text-primary hover:border-border-strong'
+                    ? 'bg-accent border-accent text-white'
+                    : 'bg-surface border-border-subtle text-text-secondary hover:text-text-primary hover:border-border-strong'
                 }`}
               >
                 {label} ({count})
@@ -241,7 +241,7 @@ function ExerciseCard({ exercise }: { exercise: ExerciseWithMuscles }) {
   return (
     <Link
       href={`/exercises/${exercise.slug}`}
-      className="group grid min-h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 py-3 px-2 first:pt-2.5 last:pb-2.5 rounded-lg hover:bg-surface-high/40 transition-colors sm:grid-cols-[minmax(12rem,0.8fr)_minmax(0,1.2fr)_auto] sm:px-3"
+      className="group grid min-h-20 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 py-3.5 first:pt-3 last:pb-3 hover:bg-surface-high/45 transition-colors sm:grid-cols-[minmax(12rem,0.8fr)_minmax(0,1.2fr)_auto] sm:px-3"
     >
       <div className="min-w-0">
         <h3 className="text-sm font-semibold text-text-primary group-hover:text-accent transition-colors leading-snug">
@@ -263,15 +263,9 @@ function ExerciseCard({ exercise }: { exercise: ExerciseWithMuscles }) {
         )}
       </div>
       <div className="flex items-center gap-2 justify-self-end text-[11px] text-text-muted">
-        {exercise.home_friendly && (
-          <span className="px-1.5 py-0.5 rounded bg-accent/10 text-accent font-medium text-[10px]">
-            Ev
-          </span>
-        )}
-        {exercise.movement_type && (
-          <span className="font-mono text-[10px] text-text-muted">{exercise.movement_type}</span>
-        )}
-        <span className="text-text-muted transition-transform group-hover:text-accent group-hover:translate-x-0.5">→</span>
+        {exercise.home_friendly && <span className="text-accent">Ev</span>}
+        {exercise.movement_type && <span>{exercise.movement_type}</span>}
+        <span className="text-text-secondary transition-transform group-hover:translate-x-0.5">→</span>
       </div>
     </Link>
   );

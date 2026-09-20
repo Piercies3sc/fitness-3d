@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { getProfileHubData } from '@/lib/supabase/profile';
 import { BackLink } from '@/components/ui/BackLink';
+import { Avatar } from '@/components/ui/Avatar';
 import { ProfileEditForm } from '@/features/profile/components/ProfileEditForm';
 import { BodyMetricsSection } from '@/features/profile/components/BodyMetricsSection';
 import { WeightHistorySection } from '@/features/profile/components/WeightHistorySection';
@@ -48,7 +49,6 @@ export default async function ProfilePage() {
     recentPRs,
     topMuscles,
     routineCount,
-    homeFriendlyCount,
     bodyMetrics,
     weightEntries,
     friends,
@@ -80,15 +80,19 @@ export default async function ProfilePage() {
               </div>
               <div className="flex gap-2">
                 <Link href="/friends" className="button-secondary inline-flex min-h-9 items-center px-2.5 text-[11px]">Arkadaşları Gör</Link>
-                <Link href="/friends" className="button-secondary inline-flex min-h-9 items-center px-2.5 text-[11px]">Arkadaş Bul</Link>
+                <Link href="/friends" className="button-primary inline-flex min-h-9 items-center px-2.5 text-[11px]">Arkadaş Bul</Link>
               </div>
             </div>
           </section>
+
           {/* Identity Section (order-1 on mobile) */}
           <section className="surface-panel order-1 border-l-2 border-l-accent p-5 flex items-center gap-4">
-            <div className="w-14 h-14 rounded-full bg-surface-high border border-border-strong flex items-center justify-center text-accent font-bold text-lg shrink-0 select-none">
-              {initials}
-            </div>
+            <Avatar
+              src={profile.avatarUrl}
+              name={profile.displayName}
+              initials={initials}
+              size="lg"
+            />
             <div className="min-w-0 flex-1">
               <h2 className="text-base font-bold text-text-primary truncate">
                 {profile.displayName || 'Profilin'}
@@ -98,33 +102,8 @@ export default async function ProfilePage() {
               </p>
               <div className="mt-1 flex items-center gap-1.5 text-[11px] text-text-muted">
                 <span className="w-1.5 h-1.5 rounded-full bg-status-success"></span>
-                <span>Aktif Üye</span>
+                <span>Aktif hesap</span>
               </div>
-            </div>
-          </section>
-
-          {/* Train at Home Quick Start (order-4 on mobile) */}
-          <section className="order-4 border-y border-border-subtle py-5 space-y-3">
-            <div className="flex items-center justify-between border-b border-border-subtle/50 pb-2">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-                Evde Antrenman
-              </h3>
-              {homeFriendlyCount > 0 && (
-                <span className="text-[11px] font-medium text-text-secondary font-mono">
-                  {homeFriendlyCount} hareket
-                </span>
-              )}
-            </div>
-            <p className="text-xs text-text-secondary leading-relaxed">
-              Vücut ağırlığı, dambıl ve direnç bandı antrenmanı. Ev antrenmanına uygun hareketleri incele.
-            </p>
-            <div className="flex flex-col gap-2 pt-1">
-              <Link
-                href="/exercises"
-                className="button-secondary w-full text-center"
-              >
-                Ev Hareketlerini İncele
-              </Link>
             </div>
           </section>
 
@@ -148,94 +127,80 @@ export default async function ProfilePage() {
               </span>
             </div>
             <p className="text-xs text-text-secondary leading-relaxed">
-              Planlı hareketler ve tekrar hedefleriyle antrenmanlarını düzenle.
+              Kayıtlı antrenman şablonlarını yönet veya yeni bir rutin oluştur.
             </p>
             <div className="flex gap-2 pt-1">
               <Link
                 href="/workout/routines"
-                className="button-secondary flex-1 text-center"
+                className="button-secondary flex-1 min-h-10 text-xs"
               >
-                Programları Yönet
+                Programları Gör
               </Link>
               <Link
                 href="/workout/routines/new"
-                className="flex-1 rounded border border-accent/30 bg-accent/10 px-3 py-2 text-center text-xs font-semibold text-accent transition-colors hover:bg-accent/20"
+                className="button-primary min-h-10 text-xs px-3"
               >
-                + Yeni Program
+                + Yeni
               </Link>
             </div>
-          </section>
-
-          {/* Preferences (Client Component) (order-11 on mobile) */}
-          <section className="order-11">
-            <ProfileEditForm
-              userId={userId}
-              initialDisplayName={profile.displayName}
-              initialUsername={profile.username}
-              initialUnitPreference={profile.unitPreference}
-            />
           </section>
         </div>
 
         {/* Right Column (Desktop) */}
         <div className="contents space-y-7 lg:col-span-7 lg:flex lg:flex-col">
-          {/* Personal Training Overview (order-2 on mobile, 2x2 on mobile, 4-col on tablet/desktop) */}
-          <section className="order-2 border-y border-border-subtle py-5">
+          {/* Profile Preferences / Edit (order-2 on mobile) */}
+          <div className="order-2">
+            <ProfileEditForm
+              userId={userId}
+              initialDisplayName={profile.displayName}
+              initialUsername={profile.username}
+              initialUnitPreference={profile.unitPreference}
+              initialAvatarUrl={profile.avatarUrl}
+            />
+          </div>
+
+          {/* Training Overview Stats (order-3 on mobile) */}
+          <section className="surface-panel order-3 p-5">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted mb-4">
               Antrenman Özeti
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {/* This Week */}
-              <div className="flex flex-col">
-                <span className="text-[11px] uppercase tracking-wider text-text-muted mb-1">
-                  Bu Hafta
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+              <div>
+                <span className="text-text-muted text-[11px] uppercase tracking-wider block mb-1">
+                  Toplam Antrenman
                 </span>
-                <span className="metric-value text-2xl sm:text-3xl">
-                  {overview.workoutsThisWeek}
-                </span>
-                <span className="text-[11px] text-text-secondary mt-0.5">
-                  antrenman
-                </span>
-              </div>
-
-              {/* Total Workouts */}
-              <div className="flex flex-col border-l border-border-subtle/40 pl-4 sm:pl-4">
-                <span className="text-[11px] uppercase tracking-wider text-text-muted mb-1">
-                  Toplam
-                </span>
-                <span className="metric-value text-2xl sm:text-3xl">
+                <span className="metric-value text-2xl text-text-primary">
                   {overview.totalWorkouts}
                 </span>
-                <span className="text-[11px] text-text-secondary mt-0.5">
-                  antrenman
+              </div>
+              <div>
+                <span className="text-text-muted text-[11px] uppercase tracking-wider block mb-1">
+                  Bu Hafta
+                </span>
+                <span className="metric-value text-2xl text-text-primary">
+                  {overview.workoutsThisWeek}
                 </span>
               </div>
-
-              {/* Working Sets */}
-              <div className="flex flex-col border-t sm:border-t-0 sm:border-l border-border-subtle/40 pt-3 sm:pt-0 sm:pl-4">
-                <span className="text-[11px] uppercase tracking-wider text-text-muted mb-1">
-                  Çalışma Setleri
+              <div>
+                <span className="text-text-muted text-[11px] uppercase tracking-wider block mb-1">
+                  Çalışma Seti
                 </span>
-                <span className="metric-value text-2xl sm:text-3xl">
+                <span className="metric-value text-2xl text-text-primary">
                   {overview.workingSets}
                 </span>
-                <span className="text-[11px] text-text-secondary mt-0.5">tamamlanan set</span>
               </div>
-
-              {/* Personal Records */}
-              <div className="flex flex-col border-t sm:border-t-0 border-l border-border-subtle/40 pt-3 sm:pt-0 pl-4">
-                <span className="text-[11px] uppercase tracking-wider text-text-muted mb-1">
-                  PRs
+              <div>
+                <span className="text-text-muted text-[11px] uppercase tracking-wider block mb-1">
+                  Kişisel Rekor
                 </span>
-                <span className="metric-value text-2xl sm:text-3xl text-accent">
+                <span className="metric-value text-2xl text-accent">
                   {overview.personalRecords}
                 </span>
-                <span className="text-[11px] text-text-secondary mt-0.5">tüm zamanların rekoru</span>
               </div>
             </div>
           </section>
 
-          {/* Active Workout Banner (order-3 on mobile) */}
+          {/* Active Workout Banner (if active, order-3 on mobile) */}
           {activeWorkout && (
             <section className="order-3 border-l-2 border-accent bg-accent/5 px-4 py-3 flex items-center justify-between gap-3">
               <div className="min-w-0 flex-1">
