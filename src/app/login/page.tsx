@@ -62,10 +62,11 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex-1 flex flex-col items-center justify-center p-6">
-      <div className="surface-panel w-full max-w-sm p-6 sm:p-8">
-        <p className="page-eyebrow mb-2 text-center">Fitness 3D</p>
-        <h1 className="page-title mb-6 text-center text-2xl">Giriş Yap</h1>
+    <main className="mx-auto flex w-full max-w-[24rem] flex-1 flex-col px-6 pb-8 pt-24 sm:max-w-md sm:px-8">
+      <div className="w-full">
+        <p className="page-eyebrow mb-9 text-text-primary">Fitness 3D <span className="ml-1 text-accent">●</span></p>
+        <h1 className="text-[2rem] font-medium tracking-[-0.055em] text-text-primary">Hoş Geldiniz</h1>
+        <p className="mt-4 max-w-[18rem] text-sm leading-6 text-text-secondary">Antrenmanlarınızı takip etmek ve vücudunuzu analiz etmek için giriş yapın.</p>
         
         {(!process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL === 'your_supabase_url_here') && (
           <div className="mb-4 p-3 rounded-md bg-status-warning/10 border border-status-warning/20 text-status-warning text-sm">
@@ -105,43 +106,46 @@ export default function LoginPage() {
           </div>
         )}
 
-        <form action={handleSubmit} className="flex flex-col gap-4">
+        <form action={handleSubmit} className="mt-20 flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="email" className="text-sm font-medium text-text-secondary">E-posta</label>
+            <label htmlFor="email" className="page-eyebrow">E-posta</label>
             <input 
               id="email" 
               name="email" 
               type="email" 
               required 
-              className="field-control px-3"
+              placeholder="ornek@fitness3d.app"
+              className="h-12 w-full rounded-none border-border-strong bg-white px-4 text-sm text-[#222] placeholder:text-[#9199a7]"
             />
           </div>
           
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="password" className="text-sm font-medium text-text-secondary">Şifre</label>
+            <div className="flex items-center justify-between"><label htmlFor="password" className="page-eyebrow">Şifre</label><span className="text-[9px] uppercase text-text-muted">Şifremi unuttum</span></div>
             <input 
               id="password" 
               name="password" 
               type="password" 
               required 
-              className="field-control px-3"
+              placeholder="••••••••"
+              className="h-12 w-full rounded-none border-border-strong bg-white px-4 text-sm text-[#222] placeholder:text-[#9199a7]"
             />
           </div>
 
           <button 
             type="submit" 
             disabled={loading}
-            className="button-primary mt-2 disabled:opacity-50"
+            className="mt-6 flex min-h-14 items-center justify-between border border-text-primary bg-transparent px-6 text-base font-semibold text-text-primary hover:border-accent hover:text-accent disabled:opacity-50"
           >
-            {loading ? 'Giriş yapılıyor...' : 'Giriş Yap'}
+            <span>{loading ? 'Giriş yapılıyor...' : 'Giriş Yap'}</span><span className="text-accent">→</span>
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-text-muted">
-          Hesabın yok mu? <Link href="/register" className="text-accent hover:underline">Kayıt Ol</Link>
+        <div className="mt-10 flex items-center gap-4 text-[10px] uppercase tracking-wide text-text-muted"><span className="h-px flex-1 bg-border-subtle" />veya<span className="h-px flex-1 bg-border-subtle" /></div>
+        <Link href="/register" className="mt-8 flex min-h-12 items-center justify-center border border-border-strong text-[10px] font-semibold uppercase tracking-wide text-text-secondary hover:border-text-secondary hover:text-text-primary">Yeni hesap oluştur</Link>
+        <p className="mt-auto pt-16 text-center text-[10px] leading-5 text-text-muted">
+          Devam ederek kullanım şartlarını kabul etmiş olursunuz.
         </p>
       </div>
     </main>
   )
 }
-

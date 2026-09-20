@@ -205,3 +205,22 @@ export function validateUnitPreference(unit: string | null | undefined): {
     error: "Unit preference must be 'kg' or 'lb'.",
   };
 }
+
+export const ALLOWED_AVATAR_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'] as const;
+export const MAX_AVATAR_SIZE_BYTES = 2 * 1024 * 1024; // 2 MB
+
+export function validateAvatarFile(file: { size: number; type: string } | null | undefined): {
+  isValid: boolean;
+  error?: string;
+} {
+  if (!file) {
+    return { isValid: false, error: 'Fotoğraf dosyası seçilmedi.' };
+  }
+  if (!ALLOWED_AVATAR_MIME_TYPES.includes(file.type as (typeof ALLOWED_AVATAR_MIME_TYPES)[number])) {
+    return { isValid: false, error: 'Yalnızca JPEG, PNG veya WebP formatları desteklenir.' };
+  }
+  if (file.size > MAX_AVATAR_SIZE_BYTES) {
+    return { isValid: false, error: 'Fotoğraf boyutu 2 MB\'tan küçük olmalıdır.' };
+  }
+  return { isValid: true };
+}

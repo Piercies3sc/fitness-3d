@@ -17,6 +17,7 @@ import {
   getTopTrainedMuscles,
   validateDisplayName,
   validateUnitPreference,
+  validateAvatarFile,
   FormattedPREvent,
 } from '../calculations/profile';
 import { validateUsername } from '../calculations/friends';
@@ -62,6 +63,8 @@ export type ProfileHubData = {
     displayName: string | null;
     username: string | null;
     unitPreference: 'kg' | 'lb';
+    avatarPath: string | null;
+    avatarUrl: string | null;
   };
   overview: {
     workoutsThisWeek: number;
@@ -116,7 +119,7 @@ export async function getProfileHubData(userId: string): Promise<ProfileHubData>
     // 1. Profile row
     supabase
       .from('profiles')
-      .select('display_name, username, unit_preference, height_cm, date_of_birth, bmr_sex')
+      .select('display_name, username, unit_preference, height_cm, date_of_birth, bmr_sex, avatar_path')
       .eq('id', userId)
       .single(),
 
@@ -161,6 +164,8 @@ export async function getProfileHubData(userId: string): Promise<ProfileHubData>
   const unitPreference = (profileRes.data?.unit_preference === 'lb' ? 'lb' : 'kg') as 'kg' | 'lb';
   const displayName = profileRes.data?.display_name || null;
   const username = profileRes.data?.username || null;
+  const avatarPath = profileRes.data?.avatar_path || null;
+  const avatarUrl = await getSignedAvatarUrl(avatarPath);
   const heightCm = profileRes.data?.height_cm ? Number(profileRes.data.height_cm) : null;
   const dateOfBirth = profileRes.data?.date_of_birth || null;
   const bmrSex = (profileRes.data?.bmr_sex as 'male' | 'female' | null) || null;
@@ -280,6 +285,8 @@ export async function getProfileHubData(userId: string): Promise<ProfileHubData>
       displayName,
       username,
       unitPreference,
+      avatarPath,
+      avatarUrl,
     },
     overview: {
       workoutsThisWeek,
@@ -350,4 +357,146 @@ export async function updateProfilePreferences(
   revalidatePath('/home');
 
   return { success: true, message: 'Profile updated.' };
+}
+
+/**
+ * Generates a signed URL for a private avatar image path.
+ */
+export async function getSignedAvatarUrl(avatarPath: string | null): Promise<string | null> {
+  if (!avatarPath) return null;
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase.storage.from('avatars').createSignedUrl(avatarPath, 3600);
+    if (error || !data?.signedUrl) {
+      return null;
+    }
+    return data.signedUrl;
+  } catch (err) {
+    console.error('Error creating signed avatar URL:', err);
+    return null;
+  }
+}
+
+export type AvatarUploadResult = {
+  success: boolean;
+  error?: string;
+  avatarUrl?: string;
+  avatarPath?: string;
+};
+
+/**
+ * Server action to upload or replace user profile photo in private avatars bucket.
+ */
+export async function uploadAvatar(formData: FormData): Promise<AvatarUploadResult> {
+  const file = formData.get('avatar') as File | null;
+  if (!file) {
+    return { success: false, error: 'Fotoğraf seçilmedi.' };
+  }
+
+  const validation = validateAvatarFile({ size: file.size, type: file.type });
+  if (!validation.isValid) {
+    return { success: false, error: validation.error };
+  }
+
+  const supabase = await createClient();
+  const { data: authData } = await supabase.auth.getClaims();
+  const userId = authData?.claims?.sub;
+  if (!userId) {
+    return { success: false, error: 'Oturum açmanız gerekiyor.' };
+  }
+
+  // Get current avatar_path to delete old file if it exists
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('avatar_path')
+    .eq('id', userId)
+    .single();
+
+  const oldPath = profile?.avatar_path;
+
+  // Derive file extension
+  const ext = file.type === 'image/png' ? 'png' : file.type === 'image/webp' ? 'webp' : 'jpg';
+  const newPath = `${userId}/${Date.now()}.${ext}`;
+
+  // Upload new avatar to private bucket
+  const fileBuffer = await file.arrayBuffer();
+  const { error: uploadError } = await supabase.storage
+    .from('avatars')
+    .upload(newPath, fileBuffer, {
+      contentType: file.type,
+      upsert: true,
+    });
+
+  if (uploadError) {
+    console.error('Error uploading avatar:', uploadError);
+    return { success: false, error: 'Fotoğraf yüklenemedi. Lütfen tekrar deneyin.' };
+  }
+
+  // Update profile avatar_path
+  const { error: updateError } = await supabase
+    .from('profiles')
+    .update({ avatar_path: newPath, updated_at: new Date().toISOString() })
+    .eq('id', userId);
+
+  if (updateError) {
+    console.error('Error updating avatar_path in profile:', updateError);
+    return { success: false, error: 'Profil güncellenemedi.' };
+  }
+
+  // If previous avatar existed and differs, clean it up
+  if (oldPath && oldPath !== newPath) {
+    await supabase.storage.from('avatars').remove([oldPath]);
+  }
+
+  const avatarUrl = await getSignedAvatarUrl(newPath);
+
+  revalidatePath('/profile');
+  revalidatePath('/home');
+  revalidatePath('/friends');
+
+  return { success: true, avatarUrl: avatarUrl || undefined, avatarPath: newPath };
+}
+
+export type AvatarRemoveResult = {
+  success: boolean;
+  error?: string;
+};
+
+/**
+ * Server action to remove user profile photo from storage and clear avatar_path.
+ */
+export async function removeAvatar(): Promise<AvatarRemoveResult> {
+  const supabase = await createClient();
+  const { data: authData } = await supabase.auth.getClaims();
+  const userId = authData?.claims?.sub;
+  if (!userId) {
+    return { success: false, error: 'Oturum açmanız gerekiyor.' };
+  }
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('avatar_path')
+    .eq('id', userId)
+    .single();
+
+  const oldPath = profile?.avatar_path;
+  if (oldPath) {
+    await supabase.storage.from('avatars').remove([oldPath]);
+  }
+
+  const { error: updateError } = await supabase
+    .from('profiles')
+    .update({ avatar_path: null, updated_at: new Date().toISOString() })
+    .eq('id', userId);
+
+  if (updateError) {
+    console.error('Error removing avatar_path in profile:', updateError);
+    return { success: false, error: 'Fotoğraf kaldırılamadı.' };
+  }
+
+  revalidatePath('/profile');
+  revalidatePath('/home');
+  revalidatePath('/friends');
+
+  return { success: true };
 }

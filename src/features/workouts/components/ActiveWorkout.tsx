@@ -94,34 +94,41 @@ export function ActiveWorkout({ initialWorkout, previousPerformance, unitPrefere
   const handleSetRemoved = () => setCompletedSetCount(c => Math.max(0, c - 1));
 
   return (
-    <div className="page-shell flex-1 max-w-4xl pb-28 sm:pb-10">
-      <div className="mb-6 border-b border-border-subtle pb-4 sm:mb-8">
-        <div className="flex items-center justify-between mb-5">
+    <div className="mx-auto w-full max-w-[24rem] flex-1 px-6 pb-12 pt-12 sm:max-w-2xl sm:px-8">
+      <div className="mb-10">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="page-eyebrow mb-2 text-accent">Aktif Antrenman</p>
+            <div className="flex items-baseline gap-2">
+              <span className="metric-value text-[1.85rem] font-sans font-medium tracking-[-0.065em]">{elapsedTime}</span>
+              <span className="page-eyebrow text-[9px]">Süre</span>
+            </div>
+          </div>
+          <button
+            onClick={handleFinish}
+            disabled={isFinishing || isDiscarding || completedSetCount === 0}
+            className="min-h-10 border border-accent bg-accent px-5 text-xs font-semibold text-black disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {isFinishing ? 'Bitiriliyor...' : 'Bitir'}
+          </button>
+        </div>
+        <div className="mt-7 flex items-center justify-between gap-3">
           <Link 
             href="/workout/routines"
-            className="inline-flex min-h-11 items-center text-sm font-medium text-text-secondary hover:text-text-primary transition-colors group"
+            className="inline-flex min-h-8 items-center text-[11px] text-text-muted hover:text-text-primary transition-colors group"
           >
             <span className="mr-1 group-hover:-translate-x-0.5 transition-transform">←</span>
-            Küçült
+            Programlar
           </Link>
           <button
             onClick={handleDiscard}
             disabled={isDiscarding || isFinishing}
-            className="button-tertiary min-h-11 text-sm text-status-danger hover:text-status-danger disabled:opacity-50"
+            className="text-[11px] text-text-muted hover:text-status-danger disabled:opacity-50"
           >
             {isDiscarding ? 'İptal ediliyor...' : 'İptal Et'}
           </button>
         </div>
-        <p className="page-eyebrow mb-2">Aktif antrenman</p>
-        <h1 className="page-title text-2xl sm:text-3xl truncate">
-          {initialWorkout.routine_name_snapshot}
-        </h1>
-        <div className="mt-3 flex items-center gap-3">
-          <span className="metric-value text-xl text-accent">{elapsedTime}</span>
-          <span className="text-text-muted text-xs">
-            Başlangıç {new Date(initialWorkout.started_at).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}
-          </span>
-        </div>
+        <p className="mt-5 truncate text-xs text-text-muted">{initialWorkout.routine_name_snapshot}</p>
       </div>
 
       <div className="flex flex-col gap-5">
@@ -137,12 +144,11 @@ export function ActiveWorkout({ initialWorkout, previousPerformance, unitPrefere
         ))}
       </div>
 
-      {/* Floating Action Bar for Mobile-First UX */}
-      <div className="fixed sm:static bottom-0 left-0 right-0 border-t border-border-subtle bg-bg-elevated/95 p-3 backdrop-blur-sm sm:mt-8 sm:border-t-0 sm:bg-transparent sm:p-0 sm:backdrop-blur-none flex flex-row items-center justify-center sm:justify-end z-10 pb-safe">
+      <div className="mt-8 flex justify-center border-t border-border-subtle pt-5">
         <button
           onClick={handleFinish}
           disabled={isFinishing || isDiscarding || completedSetCount === 0}
-          className="button-primary w-full sm:w-auto sm:min-w-44 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="button-secondary w-full disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isFinishing ? 'Bitiriliyor...' : 'Antrenmanı Bitir'}
         </button>

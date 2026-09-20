@@ -68,22 +68,25 @@ export default function RegisterPage() {
 
   if (needsVerification) {
     return (
-      <main className="flex-1 flex flex-col items-center justify-center p-6">
-        <div className="surface-panel w-full max-w-sm p-6 sm:p-8">
-          <p className="page-eyebrow mb-2 text-center">Fitness 3D</p>
-          <h1 className="page-title mb-4 text-center text-2xl">E-postanı doğrula</h1>
+      <main className="mx-auto flex w-full max-w-[24rem] flex-1 flex-col px-6 pb-8 pt-24 sm:max-w-md sm:px-8">
+        <div className="w-full">
+          <p className="page-eyebrow mb-9 text-text-primary">Fitness 3D <span className="ml-1 text-accent">●</span></p>
+          <h1 className="text-[2rem] font-medium tracking-[-0.055em] text-text-primary">Hesap Oluştur</h1>
+          <p className="mt-4 text-sm leading-6 text-text-secondary">Antrenman yolculuğunuza bugün başlayın.</p>
+          <div className="mt-10 border border-border-strong/70 bg-surface p-6">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-text-primary">✉ <span className="ml-2">E-postanı doğrula</span></h2>
 
-          <p className="text-sm text-text-secondary text-center mb-4 leading-relaxed">
+          <p className="mt-4 text-sm text-text-secondary leading-relaxed">
             Hesabın oluşturuldu. Giriş yapmadan önce e-posta adresine gönderdiğimiz doğrulama bağlantısına tıklaman gerekiyor.
           </p>
 
           {registeredEmail && (
-            <div className="mb-4 p-3 rounded-md bg-surface-high border border-border-subtle text-center text-sm font-medium text-text-primary break-all">
+            <div className="mb-4 mt-4 border-y border-border-subtle py-3 text-sm font-medium text-text-primary break-all">
               {registeredEmail}
             </div>
           )}
 
-          <p className="text-xs text-text-muted text-center mb-6">
+          <p className="text-xs text-text-muted mb-6">
             E-posta gelmediyse spam / gereksiz klasörünü de kontrol et.
           </p>
 
@@ -100,18 +103,11 @@ export default function RegisterPage() {
           )}
 
           <div className="flex flex-col gap-3">
-            <Link
-              href="/login"
-              className="button-primary w-full text-center"
-            >
-              Giriş Yap
-            </Link>
-
             <button
               type="button"
               onClick={handleResend}
               disabled={resendLoading || cooldown > 0}
-              className="button-secondary w-full disabled:opacity-50"
+              className="button-secondary w-full text-[10px] uppercase tracking-wide disabled:opacity-50"
             >
               {resendLoading
                 ? 'Gönderiliyor...'
@@ -119,6 +115,8 @@ export default function RegisterPage() {
                 ? `Tekrar Gönder (${cooldown}s)`
                 : 'Doğrulama E-postasını Yeniden Gönder'}
             </button>
+            <Link href="/login" className="text-center text-xs text-text-secondary hover:text-text-primary">Giriş sayfasına dön</Link>
+          </div>
           </div>
         </div>
       </main>
@@ -126,10 +124,11 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="flex-1 flex flex-col items-center justify-center p-6">
-      <div className="surface-panel w-full max-w-sm p-6 sm:p-8">
-        <p className="page-eyebrow mb-2 text-center">Fitness 3D</p>
-        <h1 className="page-title mb-6 text-center text-2xl">Kayıt Ol</h1>
+    <main className="mx-auto flex w-full max-w-[24rem] flex-1 flex-col px-6 pb-8 pt-24 sm:max-w-md sm:px-8">
+      <div className="w-full">
+        <p className="page-eyebrow mb-9 text-text-primary">Fitness 3D <span className="ml-1 text-accent">●</span></p>
+        <h1 className="text-[2rem] font-medium tracking-[-0.055em] text-text-primary">Hesap Oluştur</h1>
+        <p className="mt-4 text-sm leading-6 text-text-secondary">Antrenman yolculuğunuza bugün başlayın.</p>
         
         {(!process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL === 'your_supabase_url_here') && (
           <div className="mb-4 p-3 rounded-md bg-status-warning/10 border border-status-warning/20 text-status-warning text-sm">
@@ -176,54 +175,51 @@ export default function RegisterPage() {
           </div>
         ) : null}
 
-        <form action={handleSubmit} className="flex flex-col gap-4">
+        <form action={handleSubmit} className="mt-12 flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="email" className="text-sm font-medium text-text-secondary">E-posta</label>
+            <label htmlFor="email" className="page-eyebrow">E-posta</label>
             <input 
               id="email" 
               name="email" 
               type="email" 
               required 
-              className="field-control px-3"
+              className="h-12 w-full rounded-none border-border-strong bg-white px-4 text-sm text-[#222]"
             />
           </div>
           
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="password" className="text-sm font-medium text-text-secondary">Şifre</label>
+            <label htmlFor="password" className="page-eyebrow">Şifre</label>
             <input 
               id="password" 
               name="password" 
               type="password" 
               required 
-              className="field-control px-3"
+              className="h-12 w-full rounded-none border-border-strong bg-white px-4 text-sm text-[#222]"
             />
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="passwordConfirm" className="text-sm font-medium text-text-secondary">Şifreyi Onayla</label>
+            <label htmlFor="passwordConfirm" className="page-eyebrow">Şifreyi Onayla</label>
             <input 
               id="passwordConfirm" 
               name="passwordConfirm" 
               type="password" 
               required 
-              className="field-control px-3"
+              className="h-12 w-full rounded-none border-border-strong bg-white px-4 text-sm text-[#222]"
             />
           </div>
 
           <button 
             type="submit" 
             disabled={loading}
-            className="button-primary mt-2 disabled:opacity-50"
+            className="mt-5 flex min-h-14 items-center justify-between border border-text-primary bg-transparent px-6 text-base font-semibold text-text-primary hover:border-accent hover:text-accent disabled:opacity-50"
           >
-            {loading ? 'Hesap oluşturuluyor...' : 'Kayıt Ol'}
+            <span>{loading ? 'Hesap oluşturuluyor...' : 'Kayıt Ol'}</span><span className="text-accent">→</span>
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-text-muted">
-          Zaten hesabın var mı? <Link href="/login" className="text-accent hover:underline">Giriş Yap</Link>
-        </p>
+        <Link href="/login" className="mt-7 block text-center text-xs text-text-secondary hover:text-text-primary">Zaten hesabın var mı? Giriş Yap</Link>
       </div>
     </main>
   )
 }
-
