@@ -22,24 +22,6 @@ Built as a student portfolio project to practice working with Next.js, Supabase,
 - **Private friends system**: Search users by username, send/accept requests, and view read-only friend training profiles.
 - **Turkish-first interface**: Primary interface and navigation designed in Turkish.
 
-## Screenshots
-
-| 1. Body 3D (Front View) | 2. Body 3D (Back View) |
-| :---: | :---: |
-| ![Body 3D Front](docs/screenshots/body_3d_front_v2.png) | ![Body 3D Back](docs/screenshots/body_3d_back_v2.png) |
-
-| 3. Selected Muscle / Training Exposure | 4. Exercise Catalog |
-| :---: | :---: |
-| ![Selected Muscle](docs/screenshots/body_3d_selected_muscle_v2.png) | ![Exercise Catalog](docs/screenshots/exercises_catalog.png) |
-
-| 5. Exercise Detail | 6. Create Program |
-| :---: | :---: |
-| ![Exercise Detail](docs/screenshots/exercise_detail_v2.png) | ![Create Program](docs/screenshots/fitness3d-program-create-final-v4.png) |
-
-| 7. Profile |
-| :---: |
-| ![Profile](docs/screenshots/profile.png) |
-
 ## Tech Stack
 
 - **Framework**: Next.js (App Router)

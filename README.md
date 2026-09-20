@@ -22,24 +22,6 @@ Next.js, Supabase, PostgreSQL ve Three.js teknolojilerini deneyimlemek üzere ö
 - **Özel arkadaşlık sistemi**: Kullanıcı adına göre arama, istek gönderme/kabul etme ve salt okunur arkadaş antrenman profili görüntüleme.
 - **Türkçe öncelikli arayüz**: Tüm kullanıcı deneyimi ve temel akışlar için Türkçe arayüz.
 
-## Ekran Görüntüleri
-
-| 1. 3D Anatomi (Ön Görünüm) | 2. 3D Anatomi (Arka Görünüm) |
-| :---: | :---: |
-| ![3D Anatomi Ön](docs/screenshots/body_3d_front_v2.png) | ![3D Anatomi Arka](docs/screenshots/body_3d_back_v2.png) |
-
-| 3. Seçili Kas / Antrenman Yükü | 4. Hareket Kütüphanesi |
-| :---: | :---: |
-| ![Seçili Kas](docs/screenshots/body_3d_selected_muscle_v2.png) | ![Hareket Kütüphanesi](docs/screenshots/exercises_catalog.png) |
-
-| 5. Hareket Detayı | 6. Program Oluştur |
-| :---: | :---: |
-| ![Hareket Detayı](docs/screenshots/exercise_detail_v2.png) | ![Program Oluştur](docs/screenshots/fitness3d-program-create-final-v4.png) |
-
-| 7. Profil |
-| :---: |
-| ![Profil](docs/screenshots/profile.png) |
-
 ## Kullanılan Teknolojiler
 
 - **Framework**: Next.js (App Router)
