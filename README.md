@@ -1,131 +1,131 @@
-English | [Türkçe](README_TR.md)
+[English](README_EN.md)
 
 # Fitness 3D
 
-A personal full-stack web project built to explore workout tracking, data visualization, and interactive 3D graphics in the browser. It combines workout logging, routines, body metrics, and a WebGL-based human anatomy model to visualize training exposure across muscle groups.
+Antrenman takibi, veri görselleştirme ve tarayıcı tabanlı 3D grafikleri pratik etmek amacıyla geliştirilmiş kişisel bir full-stack web projesi. Antrenman kaydı, program yönetimi, vücut ölçüleri ve kas grupları üzerindeki antrenman hacmini görselleştiren WebGL tabanlı bir 3D anatomi modelini bir araya getirir.
 
-Built as a student portfolio project to practice working with Next.js, Supabase, PostgreSQL, and Three.js.
+Next.js, Supabase, PostgreSQL ve Three.js teknolojilerini deneyimlemek üzere öğrenci portfolyosu kapsamında hazırlanmıştır.
 
-## Features
+## Özellikler
 
-- **Workout routines**: Create, edit, and organize reusable workout routines.
-- **Active workout logging**: Track working sets and warm-up sets with an integrated rest timer.
-- **Workout history**: View previous sessions with total volume and set details.
-- **PR tracking & estimated 1RM**: Track personal records and calculate estimated 1RM using the Epley formula.
-- **Training volume**: Track session and exercise volume over time.
-- **Interactive 3D anatomy**: Real-time 3D anatomical model with selectable muscle groups.
-- **Training Exposure visualization**: Color-coded volume visualization mapped onto the 3D model across customizable time ranges (7d, 30d, 3m, 6m, 1y).
-- **Exercise catalog**: Library of exercises with muscle contributions, equipment types, and instructions.
-- **Home exercise filtering**: Dedicated filter for bodyweight, dumbbell, and band exercises.
-- **Body metrics & weight history**: Log body weight over time, track height, and view estimated BMR (Mifflin-St Jeor).
-- **kg/lb preference**: Switch between Metric (kg) and Imperial (lb) units, with canonical storage in kilograms.
-- **Private friends system**: Search users by username, send/accept requests, and view read-only friend training profiles.
-- **Turkish-first interface**: Primary interface and navigation designed in Turkish.
+- **Antrenman programları**: Tekrar kullanılabilir antrenman programları oluşturma, düzenleme ve sıralama.
+- **Aktif antrenman kaydı**: Çalışma ve ısınma setlerini dinlenme sayacı eşliğinde hızlıca kaydetme.
+- **Antrenman geçmişi**: Geçmiş antrenman oturumlarını, set detaylarını ve toplam hacmi inceleme.
+- **PR takibi ve tahmini 1RM**: Kişisel rekorları kaydetme ve Epley formülü ile tahmini 1RM hesaplama.
+- **Antrenman hacmi**: Egzersiz ve oturum bazında toplam hacim takibi.
+- **Etkileşimli 3D anatomi**: Seçilebilir kas gruplarına sahip gerçek zamanlı 3D anatomi modeli.
+- **Antrenman Yükü görselleştirmesi**: Farklı zaman aralıklarında (7g, 30g, 3a, 6a, 1y) kas grupları üzerindeki antrenman yoğunluğunu renkli harita olarak model üzerinde gösterme.
+- **Hareket kütüphanesi**: Birincil ve ikincil kas katılımları, ekipman türleri ve açıklamaları içeren egzersiz kataloğu.
+- **Ev antrenmanı filtresi**: Vücut ağırlığı, dambıl ve direnç bandı hareketlerini kolayca filtreleme.
+- **Vücut ölçüleri ve kilo geçmişi**: Kilo geçmişi kaydı, boy takibi ve tahmini BMR (Mifflin-St Jeor) hesaplama.
+- **kg/lb tercihi**: Arayüzde kg ve lb arasında geçiş yapabilme (veritabanında kg olarak saklanır).
+- **Özel arkadaşlık sistemi**: Kullanıcı adına göre arama, istek gönderme/kabul etme ve salt okunur arkadaş antrenman profili görüntüleme.
+- **Türkçe öncelikli arayüz**: Tüm kullanıcı deneyimi ve temel akışlar için Türkçe arayüz.
 
-## Screenshots
+## Ekran Görüntüleri
 
-| 1. Body 3D (Front View) | 2. Body 3D (Back View) |
+| 1. 3D Anatomi (Ön Görünüm) | 2. 3D Anatomi (Arka Görünüm) |
 | :---: | :---: |
-| ![Body 3D Front](docs/screenshots/body_3d_front_v2.png) | ![Body 3D Back](docs/screenshots/body_3d_back_v2.png) |
+| ![3D Anatomi Ön](docs/screenshots/body_3d_front_v2.png) | ![3D Anatomi Arka](docs/screenshots/body_3d_back_v2.png) |
 
-| 3. Selected Muscle / Training Exposure | 4. Exercise Catalog |
+| 3. Seçili Kas / Antrenman Yükü | 4. Hareket Kütüphanesi |
 | :---: | :---: |
-| ![Selected Muscle](docs/screenshots/body_3d_selected_muscle_v2.png) | ![Exercise Catalog](docs/screenshots/exercises_catalog.png) |
+| ![Seçili Kas](docs/screenshots/body_3d_selected_muscle_v2.png) | ![Hareket Kütüphanesi](docs/screenshots/exercises_catalog.png) |
 
-| 5. Exercise Detail | 6. Profile |
+| 5. Hareket Detayı | 6. Profil |
 | :---: | :---: |
-| ![Exercise Detail](docs/screenshots/exercise_detail_v2.png) | ![Profile](docs/screenshots/profile.png) |
+| ![Hareket Detayı](docs/screenshots/exercise_detail_v2.png) | ![Profil](docs/screenshots/profile.png) |
 
-## Tech Stack
+## Kullanılan Teknolojiler
 
 - **Framework**: Next.js (App Router)
 - **Frontend**: React, TypeScript, Tailwind CSS
-- **3D Graphics**: Three.js, React Three Fiber, Drei
-- **Charts**: Recharts
-- **Database & Auth**: Supabase (PostgreSQL, Supabase Auth, RLS)
-- **Testing**: Vitest
-- **Deployment**: Vercel
+- **3D Grafikler**: Three.js, React Three Fiber, Drei
+- **Grafikler**: Recharts
+- **Veritabanı & Auth**: Supabase (PostgreSQL, Supabase Auth, RLS)
+- **Test**: Vitest
+- **Dağıtım**: Vercel
 
-## Training Exposure
+## Antrenman Yükü (Training Exposure)
 
-Training Exposure is an app-specific visualization calculated as:
+Antrenman Yükü, uygulama içinde şu formülle hesaplanan deterministik bir hacim göstergesidir:
 
-$$\text{Exposure} = \sum (\text{completed working sets} \times \text{exercise-muscle contribution factor})$$
+$$\text{Antrenman Yükü} = \sum (\text{tamamlanan çalışma setleri} \times \text{hareket-kas katkı faktörü})$$
 
-This provides a comparative visual guide on the 3D model relative to the most trained muscle in the selected time window. It is a training volume representation, not a biological simulation of muscle growth or recovery.
+Seçilen zaman diliminde en çok çalıştırılan kasa göre orantılanarak 3D model üzerinde renk geçişleriyle sunulur. Bu gösterge antrenman hacmini görselleştirmeye yöneliktir; doğrudan kas gelişimi veya toparlanma (recovery) iddiasında bulunmaz.
 
-## 3D Anatomy
+## 3D Anatomi
 
-The 3D viewer renders an anatomical model with 102 tracked skeletal muscle meshes alongside context geometry. Selecting a muscle group highlights it and displays recent training data and associated exercises.
+3D görüntüleyici, 102 adet takip edilen iskelet kası parçasını ve anatomik çevre dokuları gerçek zamanlı olarak tarayıcıda işler. Bir kas grubuna tıklandığında ilgili kas vurgulanır, son dönem antrenman verisi ve o kasa yönelik egzersizler listelenir.
 
-For model sources, licenses, and attribution, see [THIRD_PARTY_ASSETS.md](THIRD_PARTY_ASSETS.md). The model uses open data derived from BodyExplorer (BodyParts3D, CC BY-SA 2.1 JP) and Z-Anatomy (CC BY-SA 4.0).
+Model kaynakları, lisanslar ve atıflar için [THIRD_PARTY_ASSETS.md](THIRD_PARTY_ASSETS.md) dosyasını inceleyebilirsiniz. Model, BodyExplorer (BodyParts3D, CC BY-SA 2.1 JP) ve Z-Anatomy (CC BY-SA 4.0) açık kaynak projelerinden türetilmiştir.
 
-## Security & Data Privacy
+## Güvenlik ve Veri Gizliliği
 
-- **Authentication**: Handled via Supabase Auth.
-- **Row Level Security (RLS)**: User-owned and social data is protected with RLS and controlled RPCs.
-- **Private Data**: Body weight and metric logs are strictly accessible only by the account owner.
-- **Friends RPCs**: Cross-user interactions (friend requests, read-only summaries) use `SECURITY DEFINER` database functions with block checks.
+- **Kimlik Doğrulama**: Supabase Auth ile yönetilir.
+- **Satır Düzeyinde Güvenlik (RLS)**: Kullanıcıya ait veriler ve sosyal etkileşimler RLS ve kontrollü RPC fonksiyonlarıyla korunur.
+- **Kişisel Veri**: Kilo ve vücut ölçüleri yalnızca hesap sahibinin erişimine açıktır.
+- **Arkadaşlık RPC'leri**: Kullanıcılar arası veri paylaşımı ve istekler, engelleme kontrolleri içeren `SECURITY DEFINER` veritabanı fonksiyonları üzerinden yürütülür.
 
-## Roadmap (Planned)
+## Gelecek Planları (Roadmap)
 
-The following items are planned for future iterations:
+İlerleyen aşamalarda eklenmesi planlanan özellikler:
 
-- Animated 3D exercise demonstrations
-- Male and female exercise models
-- First animation package focused on home workouts
-- Broader exercise library
-- Improved anatomical muscle coverage
-- Further UI/UX polish
+- 3D hareket animasyonları
+- Kadın ve erkek egzersiz modelleri
+- Ev antrenmanlarına odaklanan ilk animasyon paketi
+- Daha geniş egzersiz kütüphanesi
+- Geliştirilmiş anatomik kas kapsamı
+- Arayüz ve etkileşim iyileştirmeleri
 
-## Running Locally
+## Yerel Kurulum
 
-### Prerequisites
+### Gereksinimler
 
 - Node.js 20+
 - npm
 
-### Setup
+### Kurulum Adımları
 
-1. Clone the repository:
+1. Depoyu klonlayın:
    ```bash
    git clone https://github.com/Piercies3sc/fitness-3d.git
    cd fitness-3d
    ```
 
-2. Install dependencies:
+2. Bağımlılıkları yükleyin:
    ```bash
    npm install
    ```
 
-3. Configure environment variables:
+3. Çevre değişkenlerini ayarlayın:
    ```bash
    cp .env.example .env.local
    ```
-   Add your Supabase credentials to `.env.local`:
+   `.env.local` dosyasına Supabase proje bilgilerinizi ekleyin:
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 
-4. Run the development server:
+4. Geliştirme sunucusunu başlatın:
    ```bash
    npm run dev
    ```
 
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+   Tarayıcınızda [http://localhost:3000](http://localhost:3000) adresine gidin.
 
-## Tests & Verification
+## Testler ve Doğrulama
 
 ```bash
-# Run unit tests
+# Birim testleri çalıştırma
 npx vitest run
 
-# Run linter
+# Linter kontrolü
 npm run lint
 
-# Run production build
+# Üretim derlemesi
 npm run build
 ```
 
-## License
+## Lisans
 
-The source code is licensed under the MIT License. See [THIRD_PARTY_ASSETS.md](THIRD_PARTY_ASSETS.md) for 3D asset licenses and attribution.
+Kaynak kodlar MIT Lisansı altındadır. 3D model lisansları ve atıfları için [THIRD_PARTY_ASSETS.md](THIRD_PARTY_ASSETS.md) dosyasına bakınız.
