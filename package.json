@@ -17,6 +17,7 @@
     "node-fetch": "^2.7.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "react-easy-crop": "^6.2.3",
     "recharts": "^3.10.1",
     "three": "^0.186.0",
     "zod": "^4.6.5"

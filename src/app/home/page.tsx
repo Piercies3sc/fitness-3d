@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { logout } from './actions'
+import { InstallGuideModal } from '@/features/home/components/InstallGuideModal'
 
 export default async function HomePage() {
   const supabase = await createClient()
@@ -30,14 +31,17 @@ export default async function HomePage() {
             <span>Programları Aç</span>
             <span className="text-accent transition-transform group-hover:translate-x-0.5">→</span>
           </Link>
-          <Link href="/workout/history" className="group mt-4 inline-flex min-h-10 items-center gap-3 text-xs font-medium text-text-secondary hover:text-text-primary">
-            <svg className="h-[18px] w-[18px] shrink-0 text-text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.65" aria-hidden="true">
-              <path d="M3 12a9 9 0 1 0 3-6.7" strokeLinecap="round" />
-              <path d="M3 4v5h5" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M12 7v5l3 2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            Antrenman Geçmişi
-          </Link>
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-y-2">
+            <Link href="/workout/history" className="group inline-flex min-h-10 items-center gap-3 text-xs font-medium text-text-secondary hover:text-text-primary">
+              <svg className="h-[18px] w-[18px] shrink-0 text-text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.65" aria-hidden="true">
+                <path d="M3 12a9 9 0 1 0 3-6.7" strokeLinecap="round" />
+                <path d="M3 4v5h5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M12 7v5l3 2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Antrenman Geçmişi
+            </Link>
+            <InstallGuideModal />
+          </div>
         </section>
 
         <section className="mt-14">
