@@ -9,16 +9,17 @@ import { Avatar } from '@/components/ui/Avatar';
 type Person = { id?: string; user_id: string; username: string; display_name: string | null; avatar_url?: string | null };
 type Overview = { username: string | null; incoming: Person[]; outgoing: Person[]; friends: Person[]; blocked: Person[] };
 
-function PersonRow({ person, actions }: { person: Person; actions: React.ReactNode }) {
+function PersonRow({ person, actions, href }: { person: Person; actions: React.ReactNode; href?: string }) {
+  const content = <>
+    <Avatar src={person.avatar_url} name={person.display_name || person.username} size="sm" />
+    <div className="min-w-0">
+      <p className="text-sm font-medium text-text-primary truncate">{person.display_name || person.username}</p>
+      <p className="mt-0.5 text-xs text-text-muted truncate">@{person.username}</p>
+    </div>
+  </>;
   return (
-    <div className="flex items-center justify-between gap-3 py-3 border-b border-border-subtle/50 last:border-b-0">
-      <div className="flex items-center gap-3 min-w-0">
-        <Avatar src={person.avatar_url} name={person.display_name || person.username} size="sm" />
-        <div className="min-w-0">
-          <p className="text-sm font-medium text-text-primary truncate">{person.display_name || person.username}</p>
-          <p className="text-xs text-text-muted truncate">@{person.username}</p>
-        </div>
-      </div>
+    <div className="flex min-h-[4.6rem] items-center justify-between gap-3 border-b border-border-subtle/60 py-3 last:border-b-0">
+      {href ? <Link href={href} className="flex min-w-0 flex-1 items-center gap-3">{content}</Link> : <div className="flex min-w-0 flex-1 items-center gap-3">{content}</div>}
       <div className="flex items-center gap-2 shrink-0">{actions}</div>
     </div>
   );
@@ -70,19 +71,19 @@ export function FriendsHub({ initial }: { initial: Overview }) {
   }
 
   return (
-    <div className="space-y-7">
-      <section className="border-y border-border-subtle py-5">
-        <h2 className="section-heading">Ara</h2>
-        <div className="mt-3 flex gap-2">
+    <div className="space-y-9 pt-7">
+      <section>
+        <div className="relative">
+          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" aria-hidden="true">⌕</span>
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value.toLowerCase())}
             onKeyDown={(event) => event.key === 'Enter' && search()}
-            placeholder="Kullanıcı adıyla ara"
-            className="field-control min-w-0 flex-1 px-3 text-sm"
+            placeholder="Kullanıcı ara..."
+            className="h-12 w-full rounded-none border border-border-strong bg-white px-10 pr-12 text-sm text-[#222] placeholder:text-[#9199a7] focus:border-accent"
           />
-          <button onClick={search} type="button" className="button-primary min-h-11 px-4 text-xs">
-            Ara
+          <button onClick={search} type="button" className="absolute right-1 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center text-text-secondary hover:text-accent" aria-label="Kullanıcı ara">
+            →
           </button>
         </div>
         {results.length > 0 && (
@@ -108,8 +109,8 @@ export function FriendsHub({ initial }: { initial: Overview }) {
 
       {message && <p role="alert" className="text-xs text-status-danger">{message}</p>}
 
-      <section className="border-y border-border-subtle py-5">
-        <h2 className="section-heading">Gelen İstekler</h2>
+      <section>
+        <h2 className="page-eyebrow mb-3">İstekler ({initial.incoming.length})</h2>
         {initial.incoming.length ? (
           initial.incoming.map((person) => (
             <PersonRow
@@ -129,8 +130,8 @@ export function FriendsHub({ initial }: { initial: Overview }) {
         )}
       </section>
 
-      <section className="border-y border-border-subtle py-5">
-        <h2 className="section-heading">Gönderilen İstekler</h2>
+      <section>
+        <h2 className="page-eyebrow mb-3">Gönderilen İstekler</h2>
         {initial.outgoing.length ? (
           initial.outgoing.map((person) => (
             <PersonRow
@@ -149,13 +150,14 @@ export function FriendsHub({ initial }: { initial: Overview }) {
         )}
       </section>
 
-      <section className="border-y border-border-subtle py-5">
-        <h2 className="section-heading">Arkadaşlar</h2>
+      <section>
+        <h2 className="page-eyebrow mb-3">Arkadaşlar ({initial.friends.length})</h2>
         {initial.friends.length ? (
           initial.friends.map((person) => (
             <PersonRow
               key={person.user_id}
               person={person}
+              href={`/friends/${person.username}`}
               actions={
                 <>
                   <Link
@@ -175,8 +177,8 @@ export function FriendsHub({ initial }: { initial: Overview }) {
         )}
       </section>
 
-      <section className="border-y border-border-subtle py-5">
-        <h2 className="section-heading">Engellenen Kullanıcılar</h2>
+      <section className="border-b border-border-subtle pb-3">
+        <h2 className="page-eyebrow mb-3">Engellenen Kullanıcılar ({initial.blocked.length})</h2>
         {initial.blocked.length ? (
           initial.blocked.map((person) => (
             <PersonRow

@@ -67,12 +67,16 @@ export default async function FriendsPage() {
   };
 
   return (
-    <main className="page-shell">
-      <header className="page-header">
+    <main className="mx-auto w-full max-w-[24rem] px-6 pb-12 pt-12 sm:max-w-2xl sm:px-8">
+      <header className="border-b border-border-subtle pb-8">
+        <div className="mb-9 flex items-center justify-between">
+          <p className="page-eyebrow text-text-primary">Fitness 3D</p>
+          <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+        </div>
         <BackLink href="/profile" text="Profil" />
-        <p className="page-eyebrow">Özel bağlantılar</p>
-        <h1 className="page-title">Arkadaşlar</h1>
-        <p className="text-sm text-text-secondary">
+        <p className="page-eyebrow mb-3">Sosyal</p>
+        <h1 className="text-[2rem] font-medium tracking-[-0.055em] text-text-primary">Arkadaşlar</h1>
+        <p className="mt-3 text-sm leading-6 text-text-secondary">
           Kabul edilen arkadaşlarınla salt okunur antrenman özetini paylaş.
         </p>
       </header>

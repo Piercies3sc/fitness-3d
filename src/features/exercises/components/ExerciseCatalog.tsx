@@ -24,7 +24,7 @@ interface ExerciseCatalogProps {
 
 export function ExerciseCatalog({ exercises }: ExerciseCatalogProps) {
   // Home is the default filter per HOME-WORKOUT-FIRST product direction
-  const [activeFilter, setActiveFilter] = useState<string>('home');
+  const [activeFilter, setActiveFilter] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   // Counts for filters
@@ -91,17 +91,18 @@ export function ExerciseCatalog({ exercises }: ExerciseCatalogProps) {
   }, [filteredExercises, isGroupedView]);
 
   return (
-    <div className="space-y-7">
+    <div className="space-y-8">
       {/* Controls: Search and Filters */}
-      <div className="space-y-3 border-b border-border-subtle pb-5">
+      <div className="space-y-4">
         {/* Search */}
         <div className="relative">
+          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" aria-hidden="true">⌕</span>
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Hareket, ekipman veya kas ara..."
-            className="field-control w-full px-3.5 pr-10 text-sm"
+            className="h-12 w-full rounded-none border-border-strong bg-white px-10 pr-10 text-sm text-[#222] placeholder:text-[#9199a7] focus:border-accent"
           />
           {searchQuery && (
             <button
@@ -116,14 +117,14 @@ export function ExerciseCatalog({ exercises }: ExerciseCatalogProps) {
         </div>
 
         {/* Filter Pills: All (80), Home (55), then regions */}
-        <div className="flex gap-1.5 overflow-x-auto pb-1 text-xs [-webkit-overflow-scrolling:touch]">
+        <div className="flex gap-2 overflow-x-auto pb-1 text-[10px] font-semibold uppercase tracking-wide [-webkit-overflow-scrolling:touch]">
           <button
             type="button"
             onClick={() => setActiveFilter('all')}
-            className={`shrink-0 px-3 py-1.5 rounded border font-medium transition-colors ${
+            className={`shrink-0 border px-4 py-2 transition-colors ${
               activeFilter === 'all'
-                ? 'bg-accent border-accent text-white'
-                : 'bg-surface border-border-subtle text-text-secondary hover:text-text-primary hover:border-border-strong'
+                ? 'border-text-primary bg-transparent text-accent'
+                : 'border-border-strong bg-transparent text-text-muted hover:text-text-primary hover:border-text-secondary'
             }`}
           >
             Tümü ({filterCounts.all || 0})
@@ -131,10 +132,10 @@ export function ExerciseCatalog({ exercises }: ExerciseCatalogProps) {
           <button
             type="button"
             onClick={() => setActiveFilter('home')}
-            className={`shrink-0 px-3 py-1.5 rounded border font-medium transition-colors ${
+            className={`shrink-0 border px-4 py-2 transition-colors ${
               activeFilter === 'home'
-                ? 'bg-accent border-accent text-white'
-                : 'bg-surface border-border-subtle text-text-secondary hover:text-text-primary hover:border-border-strong'
+                ? 'border-text-primary bg-transparent text-accent'
+                : 'border-border-strong bg-transparent text-text-muted hover:text-text-primary hover:border-text-secondary'
             }`}
           >
             Ev ({filterCounts.home || 0})
@@ -146,10 +147,10 @@ export function ExerciseCatalog({ exercises }: ExerciseCatalogProps) {
                 key={key}
                 type="button"
                 onClick={() => setActiveFilter(key)}
-                className={`shrink-0 px-3 py-1.5 rounded border font-medium transition-colors ${
+                className={`shrink-0 border px-4 py-2 transition-colors ${
                   activeFilter === key
-                    ? 'bg-accent border-accent text-white'
-                    : 'bg-surface border-border-subtle text-text-secondary hover:text-text-primary hover:border-border-strong'
+                    ? 'border-text-primary bg-transparent text-accent'
+                    : 'border-border-strong bg-transparent text-text-muted hover:text-text-primary hover:border-text-secondary'
                 }`}
               >
                 {label} ({count})
@@ -161,7 +162,7 @@ export function ExerciseCatalog({ exercises }: ExerciseCatalogProps) {
 
       {/* Catalog Display */}
       {isGroupedView && groupedByRegion ? (
-        <div className="space-y-8">
+        <div className="space-y-9">
           {REGION_ORDER.map(({ key, label }) => {
             const items = groupedByRegion.get(key) || [];
             if (items.length === 0) return null;
@@ -171,11 +172,11 @@ export function ExerciseCatalog({ exercises }: ExerciseCatalogProps) {
                 <div className="flex items-baseline justify-between border-b border-border-subtle pb-1.5">
                   <h2
                     id={`region-${key}`}
-                    className="text-sm font-semibold uppercase tracking-wider text-text-muted"
+                  className="page-eyebrow"
                   >
                     {label}
                   </h2>
-                  <span className="text-xs text-text-muted">
+                  <span className="text-[11px] text-text-muted">
                     {items.length} hareket
                   </span>
                 </div>
@@ -241,16 +242,16 @@ function ExerciseCard({ exercise }: { exercise: ExerciseWithMuscles }) {
   return (
     <Link
       href={`/exercises/${exercise.slug}`}
-      className="group grid min-h-20 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 py-3.5 first:pt-3 last:pb-3 hover:bg-surface-high/45 transition-colors sm:grid-cols-[minmax(12rem,0.8fr)_minmax(0,1.2fr)_auto] sm:px-3"
+      className="group grid min-h-[4.25rem] grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1 py-3 first:pt-3 last:pb-3 transition-colors hover:bg-surface-high/30 sm:px-1"
     >
       <div className="min-w-0">
-        <h3 className="text-sm font-semibold text-text-primary group-hover:text-accent transition-colors leading-snug">
+        <h3 className="text-sm font-medium text-text-primary transition-colors group-hover:text-accent">
           {displayExerciseName(exercise.name)}
         </h3>
         <span className="mt-0.5 block text-xs text-text-muted">{exercise.equipment || 'Ekipman belirtilmedi'}</span>
       </div>
 
-      <div className="col-span-2 min-w-0 text-xs text-text-secondary sm:col-span-1">
+      <div className="col-span-2 min-w-0 text-xs text-text-muted">
         <div className="truncate">
           <span className="text-text-muted">Ana kaslar: </span>
           <span className="text-text-primary font-medium">{primaryMuscles}</span>
@@ -265,7 +266,7 @@ function ExerciseCard({ exercise }: { exercise: ExerciseWithMuscles }) {
       <div className="flex items-center gap-2 justify-self-end text-[11px] text-text-muted">
         {exercise.home_friendly && <span className="text-accent">Ev</span>}
         {exercise.movement_type && <span>{exercise.movement_type}</span>}
-        <span className="text-text-secondary transition-transform group-hover:translate-x-0.5">→</span>
+        <span className="text-text-secondary transition-transform group-hover:translate-x-0.5">›</span>
       </div>
     </Link>
   );

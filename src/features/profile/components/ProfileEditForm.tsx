@@ -10,6 +10,7 @@ interface ProfileEditFormProps {
   initialUsername: string | null;
   initialUnitPreference: 'kg' | 'lb';
   initialAvatarUrl?: string | null;
+  initials: string;
 }
 
 export function ProfileEditForm({
@@ -18,6 +19,7 @@ export function ProfileEditForm({
   initialUsername,
   initialUnitPreference,
   initialAvatarUrl,
+  initials,
 }: ProfileEditFormProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [displayName, setDisplayName] = useState(initialDisplayName || '');
@@ -118,24 +120,7 @@ export function ProfileEditForm({
   };
 
   return (
-    <div className="border-y border-border-subtle py-5">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-          Tercihler
-        </h3>
-        {!isEditing && (
-          <button
-            type="button"
-            onClick={() => {
-              setStatusMessage(null);
-              setIsEditing(true);
-            }}
-            className="button-secondary min-h-8 px-3 text-xs cursor-pointer hover:border-border-strong transition-colors"
-          >
-            Düzenle
-          </button>
-        )}
-      </div>
+    <section className="border-b border-border-subtle pb-6">
 
       {statusMessage && (
         <div
@@ -151,28 +136,35 @@ export function ProfileEditForm({
       )}
 
       {!isEditing ? (
-        <div className="divide-y divide-border-subtle/40 text-xs">
-          <div className="flex items-center justify-between py-2.5">
-            <span className="text-text-muted">Görünen ad</span>
-            <span className="text-text-primary font-medium truncate max-w-[220px]">
-              {displayName || <span className="text-text-muted italic">Belirtilmedi</span>}
-            </span>
+        <div className="flex items-center gap-4">
+          <Avatar
+            src={avatarUrl}
+            name={displayName || 'Profilin'}
+            initials={initials}
+            size="lg"
+          />
+          <div className="min-w-0 flex-1">
+            <h2 className="truncate text-xl font-semibold tracking-[-0.04em] text-text-primary">
+              {displayName || 'Profilin'}
+            </h2>
+            <p className="mt-0.5 truncate text-xs text-text-secondary">
+              {username ? `@${username}` : 'Kullanıcı adı belirlenmedi'}
+            </p>
+            <p className="mt-1 text-[10px] uppercase tracking-wide text-text-muted">{unitPreference}</p>
           </div>
-          <div className="flex items-center justify-between py-2.5">
-            <span className="text-text-muted">Kullanıcı adı</span>
-            <span className="text-text-primary font-medium font-mono truncate max-w-[220px]">
-              {username ? `@${username}` : <span className="text-text-muted italic">Belirtilmedi</span>}
-            </span>
-          </div>
-          <div className="flex items-center justify-between py-2.5">
-            <span className="text-text-muted">Birim tercihi</span>
-            <span className="text-text-primary font-medium uppercase font-mono">
-              {unitPreference}
-            </span>
-          </div>
+          <button
+            type="button"
+            onClick={() => {
+              setStatusMessage(null);
+              setIsEditing(true);
+            }}
+            className="button-secondary min-h-8 px-3 text-xs cursor-pointer hover:border-border-strong transition-colors"
+          >
+            Düzenle
+          </button>
         </div>
       ) : (
-        <form onSubmit={handleSave} className="space-y-4 pt-1">
+        <form onSubmit={handleSave} className="space-y-4">
           {/* Profile Photo Section in Edit Mode */}
           <div className="space-y-2 pb-3 border-b border-border-subtle/40">
             <label className="text-xs text-text-secondary font-medium block">
@@ -182,7 +174,7 @@ export function ProfileEditForm({
               <Avatar
                 src={avatarUrl}
                 name={displayName || 'Profil'}
-                initials={displayName?.slice(0, 2).toUpperCase() || 'BEN'}
+                initials={initials}
                 size="lg"
               />
               <div className="flex flex-wrap gap-2">
@@ -310,6 +302,6 @@ export function ProfileEditForm({
           </div>
         </form>
       )}
-    </div>
+    </section>
   );
 }

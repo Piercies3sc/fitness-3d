@@ -201,21 +201,21 @@ export function ExerciseRow({ workoutExercise, previousPerformance, unitPreferen
   };
 
   return (
-    <section className="surface-panel p-4 sm:p-5">
-      <div className="flex flex-row justify-between items-start gap-3 mb-4 border-b border-border-subtle pb-3">
+    <section className="border-t border-border-subtle pt-5">
+      <div className="flex flex-row justify-between items-start gap-3 mb-5">
         <div>
-          <p className="section-eyebrow mb-1">Hareket</p>
-          <h3 className="section-heading text-base sm:text-lg">
+          <p className="page-eyebrow mb-3">Sonraki hareket</p>
+          <h3 className="text-xl font-semibold leading-tight tracking-[-0.04em] text-text-primary">
           {displayExerciseName(workoutExercise.exercises?.name || 'Bilinmeyen hareket')}
           </h3>
         </div>
-        <div className="shrink-0 text-right text-[11px] text-text-muted font-medium">
+        <div className="shrink-0 pt-7 text-right text-[10px] text-text-muted font-medium">
           Hedef: {workoutExercise.planned_sets_snapshot} set
           {workoutExercise.target_reps_min_snapshot && ` • ${workoutExercise.target_reps_min_snapshot}-${workoutExercise.target_reps_max_snapshot} tekrar`}
         </div>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-2">
         {/* Header Row */}
         <div className="flex flex-row items-center text-[10px] font-semibold text-text-muted uppercase tracking-[0.12em] mb-2 px-1">
           <div className="w-8 text-center">Set</div>
@@ -228,11 +228,11 @@ export function ExerciseRow({ workoutExercise, previousPerformance, unitPreferen
         {sets.map((s, idx) => (
           <div 
             key={s.set_number}
-            className={`flex flex-row items-center gap-2 p-1 rounded transition-colors ${s.isCompleted ? 'bg-status-success/10 border border-status-success/30' : 'bg-transparent'}`}
+            className={`flex flex-row items-center gap-2 border px-1 py-1 transition-colors ${s.isCompleted ? 'border-border-strong bg-surface' : 'border-border-subtle bg-transparent'}`}
           >
             {/* Set Indicator */}
             <div className="w-8 flex justify-center">
-              <span className={`text-sm font-bold font-mono ${s.set_type === 'warmup' ? 'text-status-warning' : 'text-text-secondary'}`}>
+              <span className={`text-sm font-bold font-mono ${s.set_type === 'warmup' ? 'text-accent' : 'text-text-secondary'}`}>
                 {s.set_type === 'warmup' ? 'W' : getOrdinal(idx)}
               </span>
             </div>
@@ -250,7 +250,7 @@ export function ExerciseRow({ workoutExercise, previousPerformance, unitPreferen
                 value={s.weight}
                 onChange={(e) => handleUpdateInput(idx, 'weight', e.target.value)}
                 disabled={s.isSaving}
-                className={`field-control w-full h-11 min-h-11 text-center text-lg font-semibold font-mono ${s.isCompleted ? 'border-transparent bg-transparent' : ''} px-1 disabled:opacity-50`}
+                className={`field-control w-full h-10 min-h-10 rounded-none text-center text-base font-semibold font-mono ${s.isCompleted ? 'border-transparent bg-transparent' : ''} px-1 disabled:opacity-50`}
                 placeholder=""
               />
             </div>
@@ -263,7 +263,7 @@ export function ExerciseRow({ workoutExercise, previousPerformance, unitPreferen
                 value={s.reps}
                 onChange={(e) => handleUpdateInput(idx, 'reps', e.target.value)}
                 disabled={s.isSaving}
-                className={`field-control w-full h-11 min-h-11 text-center text-lg font-semibold font-mono ${s.isCompleted ? 'border-transparent bg-transparent' : ''} px-1 disabled:opacity-50`}
+                className={`field-control w-full h-10 min-h-10 rounded-none text-center text-base font-semibold font-mono ${s.isCompleted ? 'border-transparent bg-transparent' : ''} px-1 disabled:opacity-50`}
                 placeholder=""
               />
             </div>
@@ -273,9 +273,9 @@ export function ExerciseRow({ workoutExercise, previousPerformance, unitPreferen
               <button
                 onClick={() => handleToggleComplete(idx)}
                 disabled={s.isSaving}
-                className={`w-11 h-11 flex items-center justify-center rounded transition-colors ${
+                className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
                   s.isCompleted 
-                  ? 'bg-status-success text-white' 
+                  ? 'bg-accent text-black'
                     : 'bg-surface-high border border-border-strong text-text-muted hover:bg-border-subtle'
                 } disabled:opacity-50`}
               >
@@ -287,22 +287,22 @@ export function ExerciseRow({ workoutExercise, previousPerformance, unitPreferen
       </div>
 
       {restTimer !== null && restTimer > 0 && (
-        <div className="surface-inset mt-4 flex items-center justify-between px-3 py-2 text-sm">
-          <span className="text-text-muted">Dinlenme sayacı</span>
-          <span className="metric-value text-base text-accent">{Math.floor(restTimer / 60)}:{(restTimer % 60).toString().padStart(2, '0')}</span>
+        <div className="mt-5 flex items-center justify-between border border-border-strong/70 bg-surface px-4 py-4 text-sm">
+          <span><span className="page-eyebrow block mb-1">Dinlenme Süresi</span><span className="metric-value text-xl">{Math.floor(restTimer / 60)}:{(restTimer % 60).toString().padStart(2, '0')}</span></span>
+          <span className="grid h-10 w-10 place-items-center rounded-full border border-border-strong text-text-muted">↻</span>
         </div>
       )}
 
-      <div className="mt-5 flex flex-row gap-3 border-t border-border-subtle pt-4">
+      <div className="mt-6 flex flex-row gap-3">
         <button
           onClick={() => handleAddSet('warmup')}
-          className="button-secondary flex-1 h-11 min-h-11 text-sm"
+          className="button-secondary flex-1 h-11 min-h-11 text-xs"
         >
           + Isınma
         </button>
         <button
           onClick={() => handleAddSet('working')}
-          className="flex-1 h-11 min-h-11 rounded border border-accent/30 bg-accent/10 text-sm font-semibold text-accent hover:bg-accent/20 transition-colors"
+          className="flex-1 h-11 min-h-11 border border-border-strong bg-transparent text-xs font-semibold text-text-secondary hover:border-text-secondary hover:text-text-primary transition-colors"
         >
           + Set
         </button>

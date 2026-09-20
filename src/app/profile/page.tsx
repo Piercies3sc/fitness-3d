@@ -3,7 +3,6 @@ import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { getProfileHubData } from '@/lib/supabase/profile';
 import { BackLink } from '@/components/ui/BackLink';
-import { Avatar } from '@/components/ui/Avatar';
 import { ProfileEditForm } from '@/features/profile/components/ProfileEditForm';
 import { BodyMetricsSection } from '@/features/profile/components/BodyMetricsSection';
 import { WeightHistorySection } from '@/features/profile/components/WeightHistorySection';
@@ -57,22 +56,26 @@ export default async function ProfilePage() {
   const initials = getInitials(profile.displayName, email);
 
   return (
-    <main className="page-shell flex-1 max-w-6xl">
+    <main className="mx-auto w-full max-w-[24rem] flex-1 px-6 pb-12 pt-12 sm:max-w-2xl sm:px-8 lg:max-w-6xl">
       {/* Top Navigation */}
-      <div className="page-header">
+      <div className="border-b border-border-subtle pb-8">
+        <div className="mb-9 flex items-center justify-between">
+          <p className="page-eyebrow text-text-primary">Fitness 3D</p>
+          <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+        </div>
         <BackLink href="/home" text="Ana Sayfaya Dön" />
-        <p className="page-eyebrow mb-2">Kişisel antrenman</p>
-        <h1 className="page-title">Profil</h1>
-        <p className="mt-2 text-sm text-text-secondary">
+        <p className="page-eyebrow mb-3">Kişisel Antrenman</p>
+        <h1 className="text-[2rem] font-medium tracking-[-0.055em] text-text-primary">Profil</h1>
+        <p className="mt-3 text-sm leading-6 text-text-secondary">
           Özel antrenman merkezin, vücut ölçülerin ve aktivite özetin.
         </p>
       </div>
 
       {/* Main Content Layout: 1-col on mobile, 2-col on desktop */}
-      <div className="grid grid-cols-1 items-start gap-7 lg:grid-cols-12 lg:gap-8">
+      <div className="grid grid-cols-1 items-start gap-9 pt-7 lg:grid-cols-12 lg:gap-8">
         {/* Left Column (Desktop) */}
         <div className="contents space-y-7 lg:col-span-5 lg:flex lg:flex-col">
-          <section className="order-1 border-y border-border-subtle py-5">
+          <section className="order-4 border-y border-border-subtle py-5">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted">Arkadaşlar</h3>
@@ -85,27 +88,16 @@ export default async function ProfilePage() {
             </div>
           </section>
 
-          {/* Identity Section (order-1 on mobile) */}
-          <section className="surface-panel order-1 border-l-2 border-l-accent p-5 flex items-center gap-4">
-            <Avatar
-              src={profile.avatarUrl}
-              name={profile.displayName}
+          <div className="order-1">
+            <ProfileEditForm
+              userId={userId}
+              initialDisplayName={profile.displayName}
+              initialUsername={profile.username}
+              initialUnitPreference={profile.unitPreference}
+              initialAvatarUrl={profile.avatarUrl}
               initials={initials}
-              size="lg"
             />
-            <div className="min-w-0 flex-1">
-              <h2 className="text-base font-bold text-text-primary truncate">
-                {profile.displayName || 'Profilin'}
-              </h2>
-              <p className="text-xs text-text-secondary truncate mt-0.5" title={email}>
-                {email || 'Giriş yapmış kullanıcı'}
-              </p>
-              <div className="mt-1 flex items-center gap-1.5 text-[11px] text-text-muted">
-                <span className="w-1.5 h-1.5 rounded-full bg-status-success"></span>
-                <span>Aktif hesap</span>
-              </div>
-            </div>
-          </section>
+          </div>
 
           {/* Body Metrics Section (order-8 on mobile) */}
           <div className="order-8">
@@ -148,52 +140,41 @@ export default async function ProfilePage() {
 
         {/* Right Column (Desktop) */}
         <div className="contents space-y-7 lg:col-span-7 lg:flex lg:flex-col">
-          {/* Profile Preferences / Edit (order-2 on mobile) */}
-          <div className="order-2">
-            <ProfileEditForm
-              userId={userId}
-              initialDisplayName={profile.displayName}
-              initialUsername={profile.username}
-              initialUnitPreference={profile.unitPreference}
-              initialAvatarUrl={profile.avatarUrl}
-            />
-          </div>
-
           {/* Training Overview Stats (order-3 on mobile) */}
-          <section className="surface-panel order-3 p-5">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted mb-4">
+          <section className="order-3 bg-surface px-4 py-5">
+            <h3 className="page-eyebrow mb-5">
               Antrenman Özeti
             </h3>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <div className="grid grid-cols-2 gap-x-5 gap-y-6 sm:grid-cols-4">
               <div>
-                <span className="text-text-muted text-[11px] uppercase tracking-wider block mb-1">
+                <span className="text-text-muted text-[10px] uppercase tracking-wider block mb-1">
                   Toplam Antrenman
                 </span>
-                <span className="metric-value text-2xl text-text-primary">
+                <span className="metric-value text-xl text-text-primary">
                   {overview.totalWorkouts}
                 </span>
               </div>
               <div>
-                <span className="text-text-muted text-[11px] uppercase tracking-wider block mb-1">
+                <span className="text-text-muted text-[10px] uppercase tracking-wider block mb-1">
                   Bu Hafta
                 </span>
-                <span className="metric-value text-2xl text-text-primary">
+                <span className="metric-value text-xl text-text-primary">
                   {overview.workoutsThisWeek}
                 </span>
               </div>
               <div>
-                <span className="text-text-muted text-[11px] uppercase tracking-wider block mb-1">
+                <span className="text-text-muted text-[10px] uppercase tracking-wider block mb-1">
                   Çalışma Seti
                 </span>
-                <span className="metric-value text-2xl text-text-primary">
+                <span className="metric-value text-xl text-text-primary">
                   {overview.workingSets}
                 </span>
               </div>
               <div>
-                <span className="text-text-muted text-[11px] uppercase tracking-wider block mb-1">
+                <span className="text-text-muted text-[10px] uppercase tracking-wider block mb-1">
                   Kişisel Rekor
                 </span>
-                <span className="metric-value text-2xl text-accent">
+                <span className="metric-value text-xl text-accent">
                   {overview.personalRecords}
                 </span>
               </div>
