@@ -24,20 +24,32 @@ Next.js, Supabase, PostgreSQL ve Three.js teknolojilerini deneyimlemek üzere ö
 
 ## Ekran Görüntüleri
 
-### Ana Ekran
-![Ana Ekran](docs/screenshots/home_dashboard_v3.png)
-
 ### Profil
-![Profil](docs/screenshots/profile_overview_v3.png)
 
-### Hareketler
-![Hareketler](docs/screenshots/exercises_catalog_v3.png)
+<img src="docs/screenshots/profile_overview_v3.png" width="100%" alt="Profil">
 
-### 3D Anatomi
-![3D Anatomi](docs/screenshots/body_3d_front_v3.png)
-
-### Program Oluştur
-![Program Oluştur](docs/screenshots/program_create_v3.png)
+<table>
+<tr>
+<td width="50%" align="center">
+<strong>Ana Ekran</strong><br>
+<img src="docs/screenshots/home_dashboard_v3.png" width="100%" alt="Ana Ekran">
+</td>
+<td width="50%" align="center">
+<strong>Hareketler</strong><br>
+<img src="docs/screenshots/exercises_catalog_v3.png" width="100%" alt="Hareketler">
+</td>
+</tr>
+<tr>
+<td width="50%" align="center">
+<strong>3D Anatomi</strong><br>
+<img src="docs/screenshots/body_3d_front_v3.png" width="100%" alt="3D Anatomi">
+</td>
+<td width="50%" align="center">
+<strong>Program Oluştur</strong><br>
+<img src="docs/screenshots/program_create_v3.png" width="100%" alt="Program Oluştur">
+</td>
+</tr>
+</table>
 
 ## Kullanılan Teknolojiler
 

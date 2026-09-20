@@ -24,20 +24,32 @@ Built as a student portfolio project to practice working with Next.js, Supabase,
 
 ## Screenshots
 
-### Home
-![Home](docs/screenshots/home_dashboard_v3.png)
-
 ### Profile
-![Profile](docs/screenshots/profile_overview_v3.png)
 
-### Exercises
-![Exercises](docs/screenshots/exercises_catalog_v3.png)
+<img src="docs/screenshots/profile_overview_v3.png" width="100%" alt="Profile">
 
-### 3D Anatomy
-![3D Anatomy](docs/screenshots/body_3d_front_v3.png)
-
-### Program Create
-![Program Create](docs/screenshots/program_create_v3.png)
+<table>
+<tr>
+<td width="50%" align="center">
+<strong>Home</strong><br>
+<img src="docs/screenshots/home_dashboard_v3.png" width="100%" alt="Home">
+</td>
+<td width="50%" align="center">
+<strong>Exercises</strong><br>
+<img src="docs/screenshots/exercises_catalog_v3.png" width="100%" alt="Exercises">
+</td>
+</tr>
+<tr>
+<td width="50%" align="center">
+<strong>3D Anatomy</strong><br>
+<img src="docs/screenshots/body_3d_front_v3.png" width="100%" alt="3D Anatomy">
+</td>
+<td width="50%" align="center">
+<strong>Create Program</strong><br>
+<img src="docs/screenshots/program_create_v3.png" width="100%" alt="Create Program">
+</td>
+</tr>
+</table>
 
 ## Tech Stack
 
