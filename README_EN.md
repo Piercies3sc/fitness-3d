@@ -22,6 +22,23 @@ Built as a student portfolio project to practice working with Next.js, Supabase,
 - **Private friends system**: Search users by username, send/accept requests, and view read-only friend training profiles.
 - **Turkish-first interface**: Primary interface and navigation designed in Turkish.
 
+## Screenshots
+
+### Home
+![Home](docs/screenshots/home_dashboard_v3.png)
+
+### Profile
+![Profile](docs/screenshots/profile_overview_v3.png)
+
+### Exercises
+![Exercises](docs/screenshots/exercises_catalog_v3.png)
+
+### 3D Anatomy
+![3D Anatomy](docs/screenshots/body_3d_front_v3.png)
+
+### Program Create
+![Program Create](docs/screenshots/program_create_v3.png)
+
 ## Tech Stack
 
 - **Framework**: Next.js (App Router)

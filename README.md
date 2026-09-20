@@ -22,6 +22,23 @@ Next.js, Supabase, PostgreSQL ve Three.js teknolojilerini deneyimlemek üzere ö
 - **Özel arkadaşlık sistemi**: Kullanıcı adına göre arama, istek gönderme/kabul etme ve salt okunur arkadaş antrenman profili görüntüleme.
 - **Türkçe öncelikli arayüz**: Tüm kullanıcı deneyimi ve temel akışlar için Türkçe arayüz.
 
+## Ekran Görüntüleri
+
+### Ana Ekran
+![Ana Ekran](docs/screenshots/home_dashboard_v3.png)
+
+### Profil
+![Profil](docs/screenshots/profile_overview_v3.png)
+
+### Hareketler
+![Hareketler](docs/screenshots/exercises_catalog_v3.png)
+
+### 3D Anatomi
+![3D Anatomi](docs/screenshots/body_3d_front_v3.png)
+
+### Program Oluştur
+![Program Oluştur](docs/screenshots/program_create_v3.png)
+
 ## Kullanılan Teknolojiler
 
 - **Framework**: Next.js (App Router)
