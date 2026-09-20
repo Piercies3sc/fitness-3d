@@ -26,19 +26,15 @@ Built as a student portfolio project to practice working with Next.js, Supabase,
 
 | 1. Body 3D (Front View) | 2. Body 3D (Back View) |
 | :---: | :---: |
-| ![Body 3D Front](docs/screenshots/body_3d_front.png) | ![Body 3D Back](docs/screenshots/body_3d_back.png) |
+| ![Body 3D Front](docs/screenshots/body_3d_front_v2.png) | ![Body 3D Back](docs/screenshots/body_3d_back_v2.png) |
 
 | 3. Selected Muscle / Training Exposure | 4. Exercise Catalog |
 | :---: | :---: |
-| ![Selected Muscle](docs/screenshots/body_3d_selected_muscle.png) | ![Exercise Catalog](docs/screenshots/exercises_catalog.png) |
+| ![Selected Muscle](docs/screenshots/body_3d_selected_muscle_v2.png) | ![Exercise Catalog](docs/screenshots/exercises_catalog.png) |
 
 | 5. Exercise Detail | 6. Profile |
 | :---: | :---: |
-| ![Exercise Detail](docs/screenshots/exercise_detail.png) | ![Profile](docs/screenshots/profile.png) |
-
-| 7. Friends | |
-| :---: | :---: |
-| ![Friends](docs/screenshots/friends.png) | |
+| ![Exercise Detail](docs/screenshots/exercise_detail_v2.png) | ![Profile](docs/screenshots/profile.png) |
 
 ## Tech Stack
 

@@ -26,19 +26,15 @@ Next.js, Supabase, PostgreSQL ve Three.js teknolojilerini deneyimlemek üzere ö
 
 | 1. 3D Anatomi (Ön Görünüm) | 2. 3D Anatomi (Arka Görünüm) |
 | :---: | :---: |
-| ![3D Anatomi Ön](docs/screenshots/body_3d_front.png) | ![3D Anatomi Arka](docs/screenshots/body_3d_back.png) |
+| ![3D Anatomi Ön](docs/screenshots/body_3d_front_v2.png) | ![3D Anatomi Arka](docs/screenshots/body_3d_back_v2.png) |
 
 | 3. Seçili Kas / Antrenman Yükü | 4. Hareket Kütüphanesi |
 | :---: | :---: |
-| ![Seçili Kas](docs/screenshots/body_3d_selected_muscle.png) | ![Hareket Kütüphanesi](docs/screenshots/exercises_catalog.png) |
+| ![Seçili Kas](docs/screenshots/body_3d_selected_muscle_v2.png) | ![Hareket Kütüphanesi](docs/screenshots/exercises_catalog.png) |
 
 | 5. Hareket Detayı | 6. Profil |
 | :---: | :---: |
-| ![Hareket Detayı](docs/screenshots/exercise_detail.png) | ![Profil](docs/screenshots/profile.png) |
-
-| 7. Arkadaşlar | |
-| :---: | :---: |
-| ![Arkadaşlar](docs/screenshots/friends.png) | |
+| ![Hareket Detayı](docs/screenshots/exercise_detail_v2.png) | ![Profil](docs/screenshots/profile.png) |
 
 ## Kullanılan Teknolojiler
 
