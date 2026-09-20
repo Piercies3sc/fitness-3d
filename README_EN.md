@@ -1,4 +1,4 @@
-[Türkçe](README.md)
+[Türkçe](README.md) | **English**
 
 # Fitness 3D
 
