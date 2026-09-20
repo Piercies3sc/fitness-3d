@@ -32,9 +32,13 @@ Next.js, Supabase, PostgreSQL ve Three.js teknolojilerini deneyimlemek üzere ö
 | :---: | :---: |
 | ![Seçili Kas](docs/screenshots/body_3d_selected_muscle_v2.png) | ![Hareket Kütüphanesi](docs/screenshots/exercises_catalog.png) |
 
-| 5. Hareket Detayı | 6. Profil |
+| 5. Hareket Detayı | 6. Program Oluştur |
 | :---: | :---: |
-| ![Hareket Detayı](docs/screenshots/exercise_detail_v2.png) | ![Profil](docs/screenshots/profile.png) |
+| ![Hareket Detayı](docs/screenshots/exercise_detail_v2.png) | ![Program Oluştur](docs/screenshots/fitness3d-program-create-final-v4.png) |
+
+| 7. Profil |
+| :---: |
+| ![Profil](docs/screenshots/profile.png) |
 
 ## Kullanılan Teknolojiler
 

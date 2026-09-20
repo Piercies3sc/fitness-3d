@@ -32,9 +32,13 @@ Built as a student portfolio project to practice working with Next.js, Supabase,
 | :---: | :---: |
 | ![Selected Muscle](docs/screenshots/body_3d_selected_muscle_v2.png) | ![Exercise Catalog](docs/screenshots/exercises_catalog.png) |
 
-| 5. Exercise Detail | 6. Profile |
+| 5. Exercise Detail | 6. Create Program |
 | :---: | :---: |
-| ![Exercise Detail](docs/screenshots/exercise_detail_v2.png) | ![Profile](docs/screenshots/profile.png) |
+| ![Exercise Detail](docs/screenshots/exercise_detail_v2.png) | ![Create Program](docs/screenshots/fitness3d-program-create-final-v4.png) |
+
+| 7. Profile |
+| :---: |
+| ![Profile](docs/screenshots/profile.png) |
 
 ## Tech Stack
 
