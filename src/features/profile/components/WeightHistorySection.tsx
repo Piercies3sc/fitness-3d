@@ -224,7 +224,7 @@ export function WeightHistorySection({
               </div>
 
               {/* Range Toggle Buttons */}
-              <div className="flex gap-1 bg-surface-high p-0.5 rounded border border-border-subtle/60 self-start sm:self-auto">
+              <div className="flex gap-1 bg-surface-high p-0.5 rounded-md border border-border-subtle/60 self-start sm:self-auto">
                 {(['30d', '3m', '6m', '1y'] as const).map((r) => (
                   <button
                     key={r}
@@ -232,7 +232,7 @@ export function WeightHistorySection({
                     onClick={() => setRange(r)}
                     className={`px-2.5 py-1 text-[11px] font-mono font-medium rounded transition-colors cursor-pointer uppercase ${
                       range === r
-                        ? 'bg-surface border border-border-strong text-text-primary font-semibold shadow-xs'
+                        ? 'bg-accent/15 border border-accent/60 text-accent font-semibold shadow-xs'
                         : 'text-text-muted hover:text-text-secondary'
                     }`}
                   >
@@ -244,7 +244,7 @@ export function WeightHistorySection({
 
             {/* Chart Area */}
             {entriesInRange.length < 2 ? (
-              <div className="py-8 text-center border border-dashed border-border-subtle/60 rounded bg-surface-high/30 px-4">
+              <div className="py-8 text-center border border-dashed border-border-subtle/60 rounded-md bg-surface-high/30 px-4">
                 <p className="text-xs text-text-secondary">
                   {entriesInRange.length === 0
                     ? 'Bu aralıkta kilo kaydı yok.'
@@ -303,10 +303,10 @@ export function WeightHistorySection({
                       <Line
                         type="monotone"
                         dataKey="weight"
-                        stroke="#90cdf4"
+                        stroke="#FF5A36"
                         strokeWidth={2}
-                        dot={{ r: 3, fill: '#90cdf4', strokeWidth: 0 }}
-                        activeDot={{ r: 5, fill: '#63b3ed' }}
+                        dot={{ r: 3, fill: '#FF5A36', strokeWidth: 0 }}
+                        activeDot={{ r: 5, fill: '#FF5A36', stroke: '#181C1F', strokeWidth: 2 }}
                         isAnimationActive={false}
                       />
                     </LineChart>

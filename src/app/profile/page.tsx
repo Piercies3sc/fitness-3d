@@ -80,7 +80,7 @@ export default async function ProfilePage() {
               </div>
               <div className="flex gap-2">
                 <Link href="/friends" className="button-secondary inline-flex min-h-9 items-center px-2.5 text-[11px]">Arkadaşları Gör</Link>
-                <Link href="/friends" className="button-primary inline-flex min-h-9 items-center px-2.5 text-[11px]">Arkadaş Bul</Link>
+                <Link href="/friends" className="button-secondary inline-flex min-h-9 items-center px-2.5 text-[11px]">Arkadaş Bul</Link>
               </div>
             </div>
           </section>
@@ -98,7 +98,7 @@ export default async function ProfilePage() {
               </p>
               <div className="mt-1 flex items-center gap-1.5 text-[11px] text-text-muted">
                 <span className="w-1.5 h-1.5 rounded-full bg-status-success"></span>
-                <span>Aktif hesap</span>
+                <span>Aktif Üye</span>
               </div>
             </div>
           </section>
@@ -110,7 +110,7 @@ export default async function ProfilePage() {
                 Evde Antrenman
               </h3>
               {homeFriendlyCount > 0 && (
-                <span className="text-[11px] font-medium text-text-secondary">
+                <span className="text-[11px] font-medium text-text-secondary font-mono">
                   {homeFriendlyCount} hareket
                 </span>
               )}
@@ -121,7 +121,7 @@ export default async function ProfilePage() {
             <div className="flex flex-col gap-2 pt-1">
               <Link
                 href="/exercises"
-                className="button-primary w-full"
+                className="button-secondary w-full text-center"
               >
                 Ev Hareketlerini İncele
               </Link>

@@ -86,41 +86,41 @@ export default async function HistoryPage() {
               <Link 
                 key={workout.id} 
                 href={`/workout/history/${workout.id}`}
-                className="group flex flex-col py-4 sm:px-3 hover:bg-surface-high/40 transition-colors duration-200"
+                className="group flex flex-col py-4 px-2 sm:px-4 rounded-lg hover:bg-surface-high/40 transition-colors duration-150"
               >
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-3 gap-2">
                   <div className="flex-1 min-w-0">
-                    <h2 className="section-heading text-base sm:text-lg truncate" title={workout.routine_name_snapshot}>
+                    <h2 className="section-heading text-base sm:text-lg truncate group-hover:text-accent transition-colors" title={workout.routine_name_snapshot}>
                       {workout.routine_name_snapshot}
                     </h2>
-                    <p className="text-sm text-text-secondary mt-0.5">
+                    <p className="text-xs text-text-secondary mt-0.5">
                       {dateStr}
                     </p>
                   </div>
-                  <div className="flex items-center gap-2 self-start shrink-0">
+                  <div className="flex items-center gap-2.5 self-start shrink-0">
                     {workout.prCount ? (
-                    <span className="text-xs font-semibold text-accent">
+                      <span className="text-[11px] font-semibold font-mono px-2 py-0.5 rounded bg-accent/10 border border-accent/30 text-accent">
                         {workout.prCount} PR{workout.prCount === 1 ? '' : 's'}
                       </span>
                     ) : null}
-                    <div className="text-sm font-mono font-medium text-text-muted">
+                    <div className="text-xs font-mono text-text-muted">
                       {duration}
                     </div>
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-3 gap-2 pt-3 border-t border-border-subtle text-sm">
+                <div className="grid grid-cols-3 gap-2 pt-2.5 border-t border-border-subtle/50 text-sm">
                   <div className="flex flex-col">
-                    <span className="text-text-muted text-xs uppercase tracking-wider mb-0.5">Hareketler</span>
+                    <span className="text-text-muted text-[10px] uppercase tracking-wider mb-0.5">Hareketler</span>
                     <span className="metric-value text-base">{exerciseCount}</span>
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-text-muted text-xs uppercase tracking-wider mb-0.5">Çalışma Setleri</span>
+                    <span className="text-text-muted text-[10px] uppercase tracking-wider mb-0.5">Çalışma Setleri</span>
                     <span className="metric-value text-base">{workingSetCount}</span>
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-text-muted text-xs uppercase tracking-wider mb-0.5">Volume</span>
-                    <span className="metric-value text-base">{displayVolume.toLocaleString(undefined, { maximumFractionDigits: 0 })} <span className="font-sans text-xs tracking-normal">{unitPreference === 'lb' ? 'lb·reps' : 'kg·reps'}</span></span>
+                    <span className="text-text-muted text-[10px] uppercase tracking-wider mb-0.5">Volume</span>
+                    <span className="metric-value text-base">{displayVolume.toLocaleString(undefined, { maximumFractionDigits: 0 })} <span className="font-sans text-[11px] text-text-muted tracking-normal">{unitPreference === 'lb' ? 'lb·reps' : 'kg·reps'}</span></span>
                   </div>
                 </div>
               </Link>
