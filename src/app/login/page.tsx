@@ -120,7 +120,7 @@ export default function LoginPage() {
           </div>
           
           <div className="flex flex-col gap-1.5">
-            <div className="flex items-center justify-between"><label htmlFor="password" className="page-eyebrow">Şifre</label><span className="text-[9px] uppercase text-text-muted">Şifremi unuttum</span></div>
+            <div className="flex items-center justify-between"><label htmlFor="password" className="page-eyebrow">Şifre</label><Link href="/forgot-password" className="text-[10px] text-text-secondary underline-offset-4 hover:text-text-primary hover:underline">Şifremi unuttum</Link></div>
             <input 
               id="password" 
               name="password" 
