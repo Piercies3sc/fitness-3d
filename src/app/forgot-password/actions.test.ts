@@ -28,12 +28,12 @@ describe('requestPasswordReset', () => {
     expect(mockResetPasswordForEmail).not.toHaveBeenCalled()
   })
 
-  it('uses the configured site URL and callback when Supabase reports an address-specific error', async () => {
+  it('uses the configured recovery page when Supabase reports an address-specific error', async () => {
     mockResetPasswordForEmail.mockResolvedValue({ error: { message: 'User not found' } })
 
     await expect(requestPasswordReset('  PERSON@example.com ')).resolves.toEqual({ success: true })
     expect(mockResetPasswordForEmail).toHaveBeenCalledWith('person@example.com', {
-      redirectTo: 'https://fitness-3d-peach.vercel.app/auth/callback?next=%2Freset-password',
+      redirectTo: 'https://fitness-3d-peach.vercel.app/auth/recovery',
     })
   })
 
@@ -41,7 +41,7 @@ describe('requestPasswordReset', () => {
     await requestPasswordReset('person@example.com')
     expect(mockHeaders).not.toHaveBeenCalled()
     expect(mockResetPasswordForEmail).toHaveBeenCalledWith('person@example.com', {
-      redirectTo: 'https://fitness-3d-peach.vercel.app/auth/callback?next=%2Freset-password',
+      redirectTo: 'https://fitness-3d-peach.vercel.app/auth/recovery',
     })
   })
 

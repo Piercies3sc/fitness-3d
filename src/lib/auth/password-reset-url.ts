@@ -21,7 +21,7 @@ export function buildPasswordResetRedirectUrl(
     }
   }
 
-  const redirectTo = new URL('/auth/callback', siteOrigin)
-  redirectTo.searchParams.set('next', '/reset-password')
+  // The Reset Password email template appends TokenHash to this route.
+  const redirectTo = new URL('/auth/recovery', siteOrigin)
   return redirectTo.toString()
 }
