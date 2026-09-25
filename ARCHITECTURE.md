@@ -49,6 +49,11 @@ Unless a serious technical incompatibility is discovered, use the following stac
 **Authentication:**
 *   `/login`
 *   `/register`
+*   `/forgot-password`
+*   `/auth/recovery`
+*   `/reset-password`
+
+Password recovery emails link to `/auth/recovery` with Supabase's `TokenHash`. The public GET page only presents a confirmation button; its server action verifies the recovery token on POST and stores the resulting SSR session in cookies. `/reset-password` requires that recovery session before allowing a password update. The Supabase Reset Password email template must use `{{ .RedirectTo }}?token_hash={{ .TokenHash }}&amp;type=recovery` as its link target.
 
 **Authenticated Product Areas:**
 *   `/home`
