@@ -1,11 +1,10 @@
 'use server'
 
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 
-export type UpdatePasswordResult =
-  | { success: true }
-  | { error: string; invalidRecovery?: boolean }
+export type UpdatePasswordResult = { error: string; invalidRecovery?: boolean }
 
 const INVALID_RECOVERY_MESSAGE = 'Bağlantının süresi dolmuş veya geçersiz.'
 
@@ -55,12 +54,11 @@ export async function updatePassword(password: string, passwordConfirm: string):
       return { error: 'Yeni şifren mevcut şifrenle aynı olamaz.' }
     }
     if (error.status === 401 || error.code === 'session_not_found') {
-      clearRecoveryCookie(cookieStore)
-      return { error: INVALID_RECOVERY_MESSAGE, invalidRecovery: true }
+      return { error: 'Oturumun süresi doldu. Lütfen yeni bir sıfırlama bağlantısı iste.' }
     }
     return { error: 'Şifre güncellenemedi. Lütfen daha sonra tekrar dene.' }
   }
 
   clearRecoveryCookie(cookieStore)
-  return { success: true }
+  redirect('/reset-password/success')
 }

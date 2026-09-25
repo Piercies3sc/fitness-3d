@@ -6,7 +6,6 @@ import { updatePassword } from './actions'
 
 export default function ResetPasswordForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [success, setSuccess] = useState(false)
   const [invalidRecovery, setInvalidRecovery] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -23,23 +22,8 @@ export default function ResetPasswordForm() {
     )
     setIsSubmitting(false)
 
-    if ('error' in result) {
-      setError(result.error)
-      setInvalidRecovery(Boolean(result.invalidRecovery))
-      return
-    }
-
-    setSuccess(true)
-  }
-
-  if (success) {
-    return (
-      <section aria-live="polite">
-        <h1 className="text-[2rem] font-medium tracking-[-0.055em] text-text-primary">Şifren güncellendi</h1>
-        <p className="mt-4 text-sm leading-6 text-text-secondary">Yeni şifrenle giriş yapabilirsin.</p>
-        <Link href="/login" className="button-primary mt-10 w-full">Girişe Dön</Link>
-      </section>
-    )
+    setError(result.error)
+    setInvalidRecovery(Boolean(result.invalidRecovery))
   }
 
   if (invalidRecovery) {
